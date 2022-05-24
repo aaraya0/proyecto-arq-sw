@@ -11,7 +11,7 @@ func main() {
 	Driver := "mysql"
 	Usuario := "root"
 	Password := ""
-	Nombre := "sistema"
+	Nombre := "samples"
 
 	db, err := sql.Open(Driver, Usuario+":"+Password+"@tcp(127.0.0.1)/"+Nombre)
 
@@ -20,7 +20,7 @@ func main() {
 	}
 	defer db.Close()
 	fmt.Println("Success!")
-	insert, err := db.Query("INSERT INTO `test` (`Nombre`) VALUES ('Test2')")
+	insert, err := db.Query("INSERT INTO `books` VALUES ('11', 'Orgullo y Prejuicio', 'Jane Austen', 'paperback', '12')")
 	if err != nil {
 		panic(err.Error())
 	}
