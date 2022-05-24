@@ -14,7 +14,7 @@ func GetAdressById(c *gin.Context) {
 	log.Debug("Address id to load: " + c.Param("id"))
 
 	id, _ := strconv.Atoi(c.Param("id"))
-	var addressDto dto.AdressDto
+	var addressDto dto.AddressDto
 
 	addressDto, err := service.AddressService.GetAddressById(id)
 
@@ -25,7 +25,7 @@ func GetAdressById(c *gin.Context) {
 	c.JSON(http.StatusOK, addressDto)
 }
 
-func GetAddresses(c *gin.Context) {
+/*func GetAddresses(c *gin.Context) {
 	var addressesDto dto.AddressesDto
 	addressesDto, err := service.AddressService.GetAddresses()
 
@@ -35,7 +35,7 @@ func GetAddresses(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, addressesDto)
-}
+}*/
 
 func UserInsert(c *gin.Context) {
 	var addressDto dto.AddressDto

@@ -37,13 +37,13 @@ func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 	return productDto, nil
 }
 
-func (s *productService) GetProducts() (dto.productsDto, e.ApiError) {
+func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 
 	var products model.products = productCliente.GetProducts()
-	var productsDto dto.productsDto
+	var productsDto dto.ProductsDto
 
 	for _, product := range products {
-		var productDto dto.productDto
+		var productDto dto.ProductDto
 		productDto.product_name = product.Product_Name
 
 		productDto.Id = product.Id
@@ -53,14 +53,13 @@ func (s *productService) GetProducts() (dto.productsDto, e.ApiError) {
 	return productsDto, nil
 }
 
-func (s *productService) InsertProduct(productDto dto.productDto) (dto.productDto, e.ApiError) {
+func (s *productService) InsertProduct(productDto dto.ProductDto) (dto.ProductDto, e.ApiError) {
 
 	var product model.product
 
-	product.Name = productDto.Name
-	product.LastName = productDto.LastName
-	product.productName = productDto.productName
-	product.Password = productDto.Password
+	productDto.product_name = product.Product_Name
+
+	productDto.Id = product.Id
 
 	product = productCliente.Insertproduct(product)
 
