@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/aaraya0/arq-software/Integrador1/db"
 )
 
 func main() {
@@ -14,7 +16,7 @@ func main() {
 }
 func Inicio(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hola mundo")
-	//db.StartDbEngine()  //NO FUNCIONA
-	//app.StartRoute()
+
+	db.RunDB()
 
 }
