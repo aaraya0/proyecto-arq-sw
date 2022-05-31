@@ -1,4 +1,4 @@
-package db
+package main
 
 import (
 	"database/sql"
@@ -7,16 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-/*func main() {
-
-	/*insert, err := db.Query("INSERT INTO `books` VALUES ('11', 'Orgullo y Prejuicio', 'Jane Austen', 'paperback', '12')")
-	if err != nil {
-		panic(err.Error())
-	}
-	defer insert.Close()
-	fmt.Println("Yay, values added!")
-}*/
-func RunDB() {
+func main() {
 	Driver := "mysql"
 	Usuario := "root"
 	Password := ""
@@ -28,4 +19,11 @@ func RunDB() {
 	}
 	defer db.Close()
 	fmt.Println("Success!")
+	leer, err := db.Query(`SELECT * FROM productos WHERE ID=4`)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer leer.Close()
+	fmt.Println("successsssss")
+	fmt.Println(leer)
 }

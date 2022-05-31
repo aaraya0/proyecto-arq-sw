@@ -46,27 +46,32 @@ app.post('/auth', function(request, response) {
 				// Redirect to home page
 				response.redirect('/home');
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				response.send('Usuario y/o Contraseña incorrectos');
 			}			
 			response.end();
 		});
 	} else {
-		response.send('Please enter Username and Password!');
+		response.send('Por favor ingresa Usuario y Contraseña!');
 		response.end();
 	}
 });
 
 // http://localhost:3000/home
 app.get('/home', function(request, response) {
+	
 	// If the user is loggedin
 	if (request.session.loggedin) {
 		// Output username
-		response.send('Welcome back, ' + request.session.username + '!');
+		//response.send('Bienvenid@, ' + request.session.username + '!');
+		response.sendFile(path.join(__dirname + '/home.html'));
 	} else {
 		// Not logged in
-		response.send('Please login to view this page!');
+		response.send('Por favor inicia sesión para ver esta página!');
 	}
+	
+	
 	response.end();
 });
+
 
 app.listen(3000);
