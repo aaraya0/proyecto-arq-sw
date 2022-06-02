@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/aaraya0/arq-software/Integrador1/db"
 )
 
 func main() {
-	//db.RunDB()
+
 	http.HandleFunc("/", Inicio)
 	http.HandleFunc("/home", Productos)
 	http.HandleFunc("/cart", Carrito)
 	http.HandleFunc("/orden", Orden)
+	db.StartDbEngine()
 	log.Println("Servidor corriendo...")
 	http.ListenAndServe(":8080", nil)
 

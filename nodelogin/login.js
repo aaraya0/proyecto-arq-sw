@@ -63,7 +63,10 @@ app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
 		// Output username
 		//response.send('Bienvenid@, ' + request.session.username + '!');
-		response.sendFile(path.join(__dirname + '/home.html'));
+     
+
+
+		
 	} else {
 		// Not logged in
 		response.send('Por favor inicia sesión para ver esta página!');

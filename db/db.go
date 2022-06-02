@@ -1,29 +1,33 @@
-package main
+package db
 
 import (
-	"database/sql"
-	"fmt"
+	//"os"
 
-	_ "github.com/go-sql-driver/mysql"
+	prodCliente "github.com/aaraya0/arq-software/Integrador1/clients/product"
+	"github.com/aaraya0/arq-software/Integrador1/model"
+	log "github.com/sirupsen/logrus"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-func main() {
-	Driver := "mysql"
-	Usuario := "root"
-	Password := ""
-	Nombre := "sistema"
-	db, err := sql.Open(Driver, Usuario+":"+Password+"@tcp(127.0.0.1)/"+Nombre)
+var (
+	db  *gorm.DB
+	err error
+)
 
+func init() {
+
+	dsn := "root:@tcp(127.0.0.1:3306)/sistema?charset=utf8mb4&parseTime=True&loc=Local"
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic(err.Error())
+		log.Info("Connection fail")
+		log.Fatal(err)
+	} else {
+		log.Info("Connection success")
 	}
-	defer db.Close()
-	fmt.Println("Success!")
-	leer, err := db.Query(`SELECT * FROM productos WHERE ID=4`)
-	if err != nil {
-		panic(err.Error())
-	}
-	defer leer.Close()
-	fmt.Println("successsssss")
-	fmt.Println(leer)
+	prodCliente.Db = db
+}
+func StartDbEngine() {
+	db.AutoMigrate(&model.Product{})
+	log.Info("Finishing migration database tables")
 }
