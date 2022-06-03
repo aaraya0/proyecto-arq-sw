@@ -1,4 +1,4 @@
-package prodController
+package controllers
 
 import (
 	"net/http"
