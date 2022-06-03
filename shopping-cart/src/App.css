@@ -24,3 +24,25 @@
 		transform: rotate(360deg);
 	}
 }
+
+#titulo{
+	color:black;
+	font-size: larger;
+	font-weight: 700;
+}
+
+#autor{
+	color:#282c34;
+	font-style: italic;
+	font-weight: 400;
+}
+#precio{
+	color:green;
+	font-size:medium;
+	font-weight: 800;
+}
+#prod{
+	
+	color:black;
+	font-size: xx-large;
+}

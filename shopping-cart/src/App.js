@@ -3,6 +3,7 @@
 import React from "react";
 import './App.css';
 
+//import { useEffect, useState } from "react";
 class App extends React.Component {
 
 	// Constructor
@@ -28,25 +29,36 @@ class App extends React.Component {
 				});
 			})
 	}
+	
 	render() {
 		const { DataisLoaded, items } = this.state;
 		if (!DataisLoaded) return <div>
 			<h1> Please wait... </h1> </div> ;
 
 		return (
+		
+	
+
 		<div className = "App">
-			<h1> Productos </h1> {
+			<h1 id="prod">Listado de productos</h1> {
 				items.map((item) => (
 				<ol key = { item.id } >
-					Title: { item.title},
-					Author: { item.author },
-				  Price: { item.base_price }
+				<div id="titulo">{ item.title}</div>
+				<div id="autor"> { item.author }</div>	
+				 <div id="precio">${ item.base_price }</div> 
 					</ol>
 				))
 			}
 		</div>
+		
+
+				
+				
+			
 	);
 }
+
 }
 
 export default App;
+

@@ -11,6 +11,7 @@ import (
 )
 
 func GetProductById(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	log.Debug("Product id to load: " + c.Param("id"))
 	id, _ := strconv.Atoi(c.Param("id"))
 	var productDto dto.ProductDto
@@ -23,6 +24,7 @@ func GetProductById(c *gin.Context) {
 }
 
 func GetProducts(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var productsDto dto.ProductsDto
 	productsDto, err := service.ProductService.GetProducts()
 	if err != nil {
@@ -30,4 +32,5 @@ func GetProducts(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, productsDto)
+
 }
