@@ -1,8 +1,8 @@
 package app
 
 import (
-	productController "github.com/aaraya0/arq-software/Integrador1/controllers"
-	//userController "mvc-go/controllers/user"
+	productController "github.com/aaraya0/arq-software/Integrador1/controllers/product"
+	userController "github.com/aaraya0/arq-software/Integrador1/controllers/user"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -13,9 +13,9 @@ func mapUrls() {
 	router.GET("/product", productController.GetProducts)
 
 	// Users Mapping
-	/*	router.GET("/user/:id", userController.GetUserById)
-		router.GET("/user", userController.GetUsers)
-		router.POST("/user", userController.UserInsert)*/
+	router.GET("/user/:uname", userController.GetUserByUname)
+	router.GET("/user", userController.GetUsers)
+	//	router.POST("/user", userController.UserInsert)
 
 	log.Info("Finishing mappings configurations")
 

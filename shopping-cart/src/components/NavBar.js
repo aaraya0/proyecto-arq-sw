@@ -37,12 +37,12 @@ function NavBar() {
              </Link>
          </li>
          <li className='nav-item'>
-             <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
-                 Iniciar Sesión
+             <Link to='/' className='nav-links-mobile' onClick={closeMobileMenu}>
+                 Log In
              </Link>
          </li>
     </ul>
-    {button && <Button buttonStyle='btn--outline'>INICIAR SESIÓN</Button>}
+   
 </div>
     </nav>
     </>

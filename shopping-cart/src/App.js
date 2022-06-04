@@ -9,13 +9,14 @@ function App() {
   return (
     <>
     <Router>
-    <NavBar/>
+    
    
     <Routes>
-    <Route exact path="/" element={<Home/>}/>
+    <Route exact path="/" element={<Login/>}/>
     </Routes>
+    <NavBar/>
     <Routes>
-    <Route exact path="/login" element={<Login/>}/>
+    <Route exact path="/home" element={<Home/>}/>
     </Routes>
     </Router>
       

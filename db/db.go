@@ -4,7 +4,9 @@ import (
 	//"os"
 
 	prodCliente "github.com/aaraya0/arq-software/Integrador1/clients/product"
-	"github.com/aaraya0/arq-software/Integrador1/model"
+	userCliente "github.com/aaraya0/arq-software/Integrador1/clients/user"
+	model "github.com/aaraya0/arq-software/Integrador1/model"
+
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -26,8 +28,9 @@ func init() {
 		log.Info("Connection success")
 	}
 	prodCliente.Db = db
+	userCliente.Db = db
 }
 func StartDbEngine() {
-	db.AutoMigrate(&model.Product{})
+	db.AutoMigrate(&model.Product{}, &model.User{})
 	log.Info("Finishing migration database tables")
 }

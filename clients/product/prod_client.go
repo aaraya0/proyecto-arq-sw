@@ -1,7 +1,7 @@
 package product
 
 import (
-	"github.com/aaraya0/arq-software/Integrador1/model"
+	model "github.com/aaraya0/arq-software/Integrador1/model"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
