@@ -1,6 +1,7 @@
 package app
 
 import (
+	cartController "github.com/aaraya0/arq-software/Integrador1/controllers/cart"
 	productController "github.com/aaraya0/arq-software/Integrador1/controllers/product"
 	userController "github.com/aaraya0/arq-software/Integrador1/controllers/user"
 
@@ -16,7 +17,9 @@ func mapUrls() {
 	router.GET("/user/:uname", userController.GetUserByUname)
 	router.GET("/user", userController.GetUsers)
 	//	router.POST("/user", userController.UserInsert)
+	router.POST("/cart", cartController.AddProduct)
 
+	router.GET("/cart", cartController.GetCart)
 	log.Info("Finishing mappings configurations")
 
 }

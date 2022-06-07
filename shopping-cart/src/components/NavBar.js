@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import './NavBar.css';
-import {Button} from './Button';
+import image from  "./img/shopping-cart.png"
+
 function NavBar() {
     const [click, setClick]=useState(false);
-    const [button, setButton]=useState(true);
+    const [setButton]=useState(true);
     const handleClick=()=>setClick(!click);
     const closeMobileMenu=()=>setClick(false);
     const showButton =()=> {
@@ -19,7 +20,7 @@ function NavBar() {
     <>
     <nav className="NavBar">
 <div className="navbar-container">
-    <Link to="/" className="navbar-logo">
+    <Link to="/home" className="navbar-logo">
         LIBRERIA
     </Link>
     <div className='menu-icon' onClick={handleClick}>
@@ -33,16 +34,12 @@ function NavBar() {
          </li>
          <li className='nav-item'>
              <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>
-                 Carrito
+                <img src={image} className="imagen"/>
              </Link>
          </li>
-         <li className='nav-item'>
-             <Link to='/' className='nav-links-mobile' onClick={closeMobileMenu}>
-                 Log In
-             </Link>
-         </li>
+         
     </ul>
-   
+    
 </div>
     </nav>
     </>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom'
-
+import { Link} from 'react-router-dom';
 import "./Login.css";
+
 async function getUserByID(id) {
   return fetch('http://127.0.0.1:8090/user/' + id)
     .then(data => data.json())
@@ -31,7 +31,8 @@ function Login (){
     
     //setUserData(user);
     
-    alert(user.password);
+  
+    alert(user.name);
 
     // Compare user info
     if (user) {
@@ -78,7 +79,7 @@ function Login (){
     <div className="app">
       <div className="login-form">
        
-        {isSubmitted ? <Link to="/home" className="home">Home</Link> 
+        {isSubmitted ? <Link to='/home' className="home">Home</Link>
         : renderForm}
         
       </div>

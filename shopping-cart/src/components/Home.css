@@ -1,34 +1,10 @@
-.App {
-	text-align: center;
-	color: Green;
-}
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
 
 #titulo{
 	color:#242424;
-	font-size: 25px;
+	font-size: 40px;
 	font-weight: 700;
+	font-family:serif;
+  margin-top:20px;
 }
 
 #autor{
@@ -37,12 +13,16 @@
 	font-weight: 400;
     padding-top: 4px;
     font-size: 20px;
+    margin-top:15px;
+	
 }
 #precio{
-	color:#242424;
-	font-size:25px;
-	font-weight: 800;
+	color:darkolivegreen;
+	font-size:30px;
+	font-weight: 1000;
     padding-top: 10px;
+    margin-top:5px;
+
 }
 #prod{
 	
@@ -52,10 +32,89 @@
 }
 
 
-.item{
-    border-color:#242424;
-   border-width: 1px;
-   border-style:solid;
-   padding: 15px;
+
+.item {
+	/* Add shadows to create the "card" effect */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	margin: 10px;
+	
+	width: 400px;
+  height: 500px;
+text-align: center;
+
+	background-color: gainsboro;
+
+  }
+  .item:hover{
+
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	  transform: scale(1.05);
+  }
+.product{
+	
+	display:flex;
+	
+}
+
+
+.button-50 {
+  appearance: button;
+  background-color: #242424;
+  background-image: none;
+  border: 1px solid #242424;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#242424 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: serif;
  
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 15px;
+  font-weight:200;
+  line-height: 5px;
+  margin: 0 5px 5px 0;
+  overflow: visible;
+  padding: 5px 5px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+
+}
+
+.button-50:focus {
+  text-decoration: none;
+}
+
+.button-50:hover {
+  text-decoration: none;
+}
+
+.button-50:active {
+  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.button-50:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #242424 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-50 {
+    padding: 12px 50px;
+  }
+}
+
+img{
+
+  width:130px;
+  margin-top:10px;
+  margin-bottom: 20px;
 }
