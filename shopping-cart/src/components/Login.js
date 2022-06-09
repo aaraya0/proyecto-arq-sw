@@ -15,7 +15,7 @@ async function getUserByID(id) {
 document.cookie = cname+"="+cvalue+";"+"path=/";
  }
 
- function goto(path){
+ function gopath(path){
   window.location = window.location.origin + path
 }
 
@@ -43,7 +43,6 @@ function Login (){
     //setUserData(user);
     
   
-    alert(user.name);
 
     // Compare user info
     if (user) {
@@ -71,7 +70,7 @@ function Login (){
 
   // JSX code for login form
   const renderForm = (
-    <div className="form">
+    <div className="form2">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Username </label>
@@ -94,11 +93,11 @@ function Login (){
     <div className="app">
       <div className="login-form">
        
-        {isSubmitted ? goto('/home')
+      {isSubmitted ? gopath('/home')
         : renderForm}
         
       </div>
-    
+     
      
     </div>
   );

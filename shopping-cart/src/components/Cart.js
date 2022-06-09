@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Cookies from 'universal-cookie';
 import "./Cart.css";
 const cookies = new Cookies();
@@ -7,6 +8,9 @@ const cookies = new Cookies();
     return fetch("http://127.0.0.1:8090/product/" + id).then(response => response.json())
   }
 
+  function gopath(path){
+    window.location = window.location.origin + path
+  }
   
 async function getCartProducts(){
     let current= cookies.get('cart')
@@ -18,7 +22,7 @@ async function getCartProducts(){
         let prodID=prod[0]
        
         let cant= prod[1]
-        if (prodID!=0 && cant!="undefined" ){
+        if (prodID!=0 && cant!="undefined" && cant!=0){
         let product = await getProductById(prodID)
         product.quantity = cant;
         items.push(product)
@@ -42,15 +46,12 @@ return items;
    
    </div>
    <div className="subtotal"> Subtotal: ${product.quantity * product.base_price} </div>
+   <button id={product.id} class="Xbutton" role="button" onClick={DeleteCartProduct}>X</button>
    </div>
   
+    ) }
 
-
-    )
-       }
-
-
-       async function setCart(setter, setterTotal){
+async function setCart(setter, setterTotal){
         let total = 0;
         await getCartProducts().then(response => {
           setter(response)
@@ -61,32 +62,64 @@ return items;
         })
       }
 
+async function DeleteCartProduct(e){
+  let itemID = e.target.id
+	let current= cookies.get("cart")
+	let newCart=''
+  let items=current.split(',')
 
 
-  function Cart(){
+items.forEach(item =>{
+
+		let comp= item.split('=')
+		let compID=comp[0]
+		let quantity= comp[1]
+    if (quantity==1){
+      newCart=`${newCart},=0`
+    }
+		if (itemID==compID && quantity!=0){
+			quantity--
+		
+		}
+	    newCart=`${newCart},${compID}=${quantity}`
+	})
+
+cookies.set("cart", newCart)
+
+	}
+
+
+
+
+
+
+      function Cart(){
  
   const [cartProducts, setCartProducts] = useState([]);
   const [total, setTotal] = useState(0);
   if (cartProducts.length <= 0){
     setCart(setCartProducts, setTotal)
   }
-  const renderEmptyCart = (
-    <a className="empty-cart">El carrito esta vacio</a>
-  )
+
 
   return (
     <div className="cart">
   
-
+ { showProducts(cartProducts)}
+ 
 <div className="prods">
-      {cookies.get("cart") ? showProducts(cartProducts) : renderEmptyCart}
+     
       </div>
+    
+      <div id="main">
+       
 
       <div className="boton-checkout">
       <div className="tot"> Total: ${total} </div>
       <div><button id="check" >Checkout</button></div>  
       </div>
-    </div>
+      </div>
+      </div>
   );
 
 

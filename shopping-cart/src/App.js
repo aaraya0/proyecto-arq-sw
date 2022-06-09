@@ -17,9 +17,10 @@ function App() {
     <Routes>
     <Route exact path="/" element={<Login/>}/>
     </Routes>
-    <NavBar/>
     
+    <NavBar/>
     <Routes>
+    
     <Route exact path="/home" element={<Home/>}/>
     <Route exact path="/cart" element={<Cart/>}/>
     </Routes>

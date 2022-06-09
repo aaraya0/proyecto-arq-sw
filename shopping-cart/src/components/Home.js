@@ -29,8 +29,7 @@ items.forEach(item =>{
 		if (itemID==compID){
 			quantity++
 			found=true
-			alert(quantity)
-			
+	
 		}
 	    newCart=`${newCart},${compID}=${quantity}`
 	})
