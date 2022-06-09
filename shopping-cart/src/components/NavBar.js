@@ -35,11 +35,7 @@ function NavBar() {
         <i className={click ? 'fas fa-times': 'fas fa-bars'}/>
     </div>
     <ul className={click ? 'nav-menu active' : 'nav-menu'}> 
-         <li className='nav-item'>
-             <Link to='/categories' className='nav-links' onClick={closeMobileMenu}>
-                 Categorías
-             </Link>
-         </li>
+        
          <li className='nav-item'>
              <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>
                 <img src={image} className="imagen"/>

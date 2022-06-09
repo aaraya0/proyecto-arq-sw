@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link} from 'react-router-dom';
+
 import "./Login.css";
 
 async function getUserByID(id) {
@@ -14,6 +14,10 @@ async function getUserByID(id) {
 //let expires= "expires="+d.toUTCString();
 document.cookie = cname+"="+cvalue+";"+"path=/";
  }
+
+ function goto(path){
+  window.location = window.location.origin + path
+}
 
 function Login (){
    
@@ -90,7 +94,7 @@ function Login (){
     <div className="app">
       <div className="login-form">
        
-        {isSubmitted ? <Link to='/home' className="home">Home</Link>
+        {isSubmitted ? goto('/home')
         : renderForm}
         
       </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import './Home.css';
-import image from "./img/libro1.jpg";
+
 import Category from "./categorias"
 import Cookies from 'universal-cookie';
  
@@ -138,7 +138,7 @@ const producto= items.map((item) => (
                 </div>
 					
 			    <div className="buscar">
-				<input type="text" id="search" placeholder="Search..." onChange={search}/>
+				<input type="text" id="search" placeholder="Buscar libros" onChange={search}/>
 				</div>
 				</div>
 				
