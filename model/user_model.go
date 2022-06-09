@@ -5,7 +5,7 @@ type User struct {
 	Name     string `gorm:"type:varchar(350);"`
 	LastName string `gorm:"type:varchar(250);"`
 	UserName string `gorm:"type:varchar(150);"`
-	Password int    `gorm:"type:int(11);"`
+	Password string `gorm:"type:varchar(150);"`
 }
 
 type Users []User

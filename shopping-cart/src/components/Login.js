@@ -8,6 +8,13 @@ async function getUserByID(id) {
     
  }
 
+ async function setCookie (cname, cvalue){
+  // const d= new Date();
+  // d.setTime(d.getTime()+(exdays*24*60*60*1000));
+//let expires= "expires="+d.toUTCString();
+document.cookie = cname+"="+cvalue+";"+"path=/";
+ }
+
 function Login (){
    
 
@@ -41,10 +48,14 @@ function Login (){
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
+       // setCookie(user.user_name);
+       setCookie("username", user.name)
+        
       }
     } else {
       // Username not found
       setErrorMessages({ name: "uname", message: errors.uname });
+      
     }
   };
 

@@ -3,6 +3,46 @@
 import React from "react";
 import './Home.css';
 import image from "./img/libro1.jpg";
+
+import Cookies from 'universal-cookie';
+ 
+
+ 
+const cookies = new Cookies();
+const cookiesCartKey= 'cart';
+cookies.set(cookiesCartKey, `0=0`)
+async function AddToCart(e){
+
+	let itemID = e.target.id
+	let current= cookies.get(cookiesCartKey)
+	let newCart=''
+
+
+   let items=current.split(',')
+
+let found= false
+items.forEach(item =>{
+
+		let comp= item.split('=')
+		let compID=comp[0]
+		let quantity= comp[1]
+		if (itemID==compID){
+			quantity++
+			found=true
+			alert(quantity)
+			
+		}
+	    newCart=`${newCart},${compID}=${quantity}`
+	})
+	if (!found){
+		 newCart=`${newCart},${itemID}=1`
+	}
+cookies.set(cookiesCartKey, newCart)
+	}
+
+
+
+
 class Home extends React.Component {
 
 	// Constructor
@@ -44,7 +84,7 @@ const producto= items.map((item) => (
 	<div id="autor"> { item.author }</div>	
 	 <div id="precio">${ item.base_price }</div> 
 	 <img src={image}/>
-	 <div><button class="button-50" role="button">Agregar 🛒</button></div>
+	 <div><button id={ item.id } class="button-50" role="button" onClick={AddToCart}>Agregar 🛒</button></div>
 		</ol>
 		
 ))

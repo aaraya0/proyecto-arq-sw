@@ -167,3 +167,9 @@
 width: 40px;
 
   }
+
+.logInfo{
+  color: #fff;
+  font-size: 15px;
+  display:flex;
+}
