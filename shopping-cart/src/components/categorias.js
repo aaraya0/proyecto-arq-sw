@@ -24,13 +24,14 @@ async function getCategories(){
 
 
   function productsByCategoryId(id, setter, categorySetter) {
-    getProductsByCategoryId(id).then(response => {setter(response); cookies.set("category", id); getCategoryById(id).then(category => categorySetter(category))})
+    getProductsByCategoryId(id).then(response => {
+        setter(response); cookies.set("category", id); getCategoryById(id).then(category => categorySetter(category))})
   }
   
   function showCategories(categories, setter, categorySetter) {
-    return categories.map((category, i) => <a onClick={() => productsByCategoryId(category.id, setter, categorySetter)} obj={category} key={category.id}>{category.name}</a>)
+    return categories.map((category) => <a onClick={() => productsByCategoryId(category.id, setter, categorySetter)} obj={category} key={category.id}>{category.name}</a>)
   }
-  function goto(path){
+  function gopath(path){
     window.location = window.location.origin + path
   }
   
@@ -38,11 +39,11 @@ async function getCategories(){
  
   
   function retry() {
-    goto("/home")
+    gopath("/home")
   }
   function Category(){
     const [categories, setCategories] = useState([])
-   const [ setProducts] = useState([])
+   const [ products, setProducts] = useState([])
     const [category, setCategory] = useState("")
     if(categories.length <= 0){
         getCategories().then(response => setCategories(response))
@@ -52,7 +53,7 @@ async function getCategories(){
 <div>
 <div id="mySidenav" className="sidenav">
 
-{categories.length > 0 ? showCategories(categories, setProducts, setCategory) : <a onClick={retry}> Loading Failed. Click to retry </a>}
+{categories.length > 0 ? showCategories(categories, setProducts, setCategory) : <a onClick={retry}> Algo salió mal. Presione para reintentar. </a>}
 </div>
 
 <div id="main">

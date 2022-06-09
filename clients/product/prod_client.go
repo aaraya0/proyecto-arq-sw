@@ -25,7 +25,7 @@ func GetProducts() model.Products {
 }
 func GetProductsByCategoryId(id int) model.Products {
 	var products model.Products
-	Db.Where("id_category = ?", id).Find(&products)
+	Db.Where("category_id = ?", id).Find(&products)
 	log.Debug("Products", products)
 
 	return products
