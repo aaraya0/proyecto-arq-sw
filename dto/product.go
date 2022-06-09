@@ -5,8 +5,9 @@ type ProductDto struct {
 	Title  string `json:"title"`
 	Author string `json:"author"`
 	//UniversalCode string  `json:"universal_code"`
-	Price float32 `json:"base_price"`
-	Stock int     `json:"stock"`
+	Price    float32     `json:"base_price"`
+	Stock    int         `json:"stock"`
+	Category CategoryDto `json:"category"`
 
 	//Picture       string  //`json:"picture_url"`
 }

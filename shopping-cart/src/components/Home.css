@@ -39,7 +39,7 @@
 	transition: 0.3s;
 	margin: 10px;
 	
-	width: 400px;
+	width: 500px;
   height: 500px;
 text-align: center;
 
@@ -53,7 +53,15 @@ text-align: center;
   }
 .product{
 	
-	display:flex;
+  display: grid;
+ 
+  grid-template-columns: repeat(2, 1fr);
+   
+  grid-auto-rows: auto;
+   
+  grid-gap: 1rem;
+
+  margin-left: 460px;
 	
 }
 
@@ -117,4 +125,23 @@ img{
   width:130px;
   margin-top:10px;
   margin-bottom: 20px;
+  }
+.buscar{
+margin-top: 10px;	
+margin-bottom: 10px;
+position:fixed; /* Stay in place */
+z-index: 1; /* Stay on top */
+left:180px;
+font-size: 30px;
+font-weight: 200;
+}
+
+.seleccion{
+  margin-top: 10px;	
+margin-bottom: 10px;
+position:fixed; /* Stay in place */
+z-index: 1; /* Stay on top */
+left:30px;
+font-size: 30px;
+font-weight: 200;
 }

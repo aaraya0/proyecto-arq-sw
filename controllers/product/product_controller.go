@@ -34,3 +34,16 @@ func GetProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, productsDto)
 
 }
+func GetProductsByCategoryId(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	var productsDto dto.ProductsDto
+	id, _ := strconv.Atoi(c.Param("category_id"))
+	productsDto, err := service.ProductService.GetProductsByCategoryId(id)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, productsDto)
+}

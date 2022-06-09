@@ -3,7 +3,7 @@
 import React from "react";
 import './Home.css';
 import image from "./img/libro1.jpg";
-
+import Category from "./categorias"
 import Cookies from 'universal-cookie';
  
 
@@ -39,8 +39,44 @@ items.forEach(item =>{
 	}
 cookies.set(cookiesCartKey, newCart)
 	}
+	function search(){
+		let input, filter, a, i, selection;
+		input = document.getElementById("search");
+		selection= document.getElementById("searchOp");
+		filter = input.value.toUpperCase();
+		a = document.getElementsByClassName("item");
+		if (selection.selectedOptions[0].value=="t"){
+		for (i = 0; i < a.length; i++) {
+		  let txtValue = a[i].children[0].textContent || a[i].children[0].innerText;
+		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			a[i].style.display = "inherit";
+		  } else {
+			a[i].style.display = "none";
+		  }
+		}
+		if(input.value.toUpperCase().length <= 0){
+		  for(i = 0; i < a.length; i++){
+			a[i].style.display = "inherit";
+		  }
+		}}
+		if (selection.selectedOptions[0].value=="a"){
+			for (i = 0; i < a.length; i++) {
+			  let txtValue = a[i].children[1].textContent || a[i].children[1].innerText;
+			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				a[i].style.display = "inherit";
+			  } else {
+				a[i].style.display = "none";
+			  }
+			}
+			if(input.value.toUpperCase().length <= 0){
+			  for(i = 0; i < a.length; i++){
+				a[i].style.display = "inherit";
+			  }
+			}}
 
-
+	  
+	  }
+	
 
 
 class Home extends React.Component {
@@ -78,83 +114,42 @@ class Home extends React.Component {
 
 const producto= items.map((item) => (
 	
-	<ol key = { item.id } className="item">
+	<div key = { item.id } className="item">
 		
 	<div id="titulo">{ item.title}</div>
 	<div id="autor"> { item.author }</div>	
 	 <div id="precio">${ item.base_price }</div> 
-	 <img src={image}/>
+	 
 	 <div><button id={ item.id } class="button-50" role="button" onClick={AddToCart}>Agregar 🛒</button></div>
-		</ol>
+		</div>
 		
 ))
 
+
 		return (
-		<div className="product">{producto}</div>
+			<div >
+				<Category/>
+				<div className="form">
+				<div className="seleccion">
+				<select name="busqueda" id="searchOp">
+                <option value="t">Buscar por Titulo</option>
+                <option value="a">Buscar por Autor</option>
+                </select>
+                </div>
+					
+			    <div className="buscar">
+				<input type="text" id="search" placeholder="Search..." onChange={search}/>
+				</div>
+				</div>
+				
+				
+				
+				<div className="product">{producto}</div>
+		
+		</div>
 		)
 
-		/*<div className = "App">
-			<h1 id="prod">Listado de productos</h1> {
-				items.map((item) => (
-				<ol key = { item.id } className="item">
-				<div id="titulo">{ item.title}</div>
-				<div id="autor"> { item.author }</div>	
-				 <div id="precio">${ item.base_price }</div> 
-					</ol>
-				))
-			}
-		</div>
-		);*/
-
-
-
-      /*  <div>
-      <input placeholder="Enter Title" onChange={event => setQuery(event.target.value)} />
 	
-		{
-			items.filter(item => {
-			  if (query === '') {
-				return items;
-			  } else if (item.title.toLowerCase().includes(query.toLowerCase())) {
-				return items;
-			  }
-			}).map((item) => (
-			  <div className="box" key={item.id}>
-				<p>{item.title}</p>
-				<p>{item.author}</p>
-			  </div>
-			))
-		  }
-
-</div>		
-				
-			
-		);*/
-	/*	<div>
-		<h1 id="prod">Listado de productos</h1>
-<Card style={{width:'18rem'}}>
-			 {
-				items.map((item) => (
-					
-				<div key = { item.id } className="item">
-				
-				<Card.Body>
-				
-				<Card.Title>{ item.title}</Card.Title>
-				<Card.Subtitle>{ item.author }</Card.Subtitle> 
-				<Card.Text>${ item.base_price }</Card.Text>
-		
-				
-				
-					
-					</Card.Body>
-					</div>
-				
-				))
-			}
-		</Card>
-		</div>
-		)*/
 }
 
 }

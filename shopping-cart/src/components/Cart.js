@@ -1,60 +1,39 @@
-
-import React from 'react';
+import React, { useState } from "react";
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
-class Cart extends React.Component{
-    constructor() {
-        super();
-        this.state = {producto:[]};
+function getProductById(id){
+    return fetch("http://127.0.0.1:8090/product/" + id).then(response => response.json())
+  }
 
-    }
-componentDidMount(){
-    
-        let current= cookies.get('cart')
-        let items=current.split(',')
-        items.forEach(item =>{
-            
-            let prod= item.split('=')
-            let prodID=prod[0]
-            let cant= prod[1]
-            if (prodID!=0 && cant!="undefined" ){
-                fetch( "http://localhost:8090/product/"+prodID)
-                .then(res => res.json())
-                .then((json) => {
-                    this.setState({
-                        producto: json 
-                    });
-                })
-            }
-            })
-        
-        }
- render() {
   
-    const { producto } = this.state;
-   
-            return (
-            <div className="product">
-           <ol key = { producto.id } className="item">
-            
-            <div id="titulo">{ producto.title}</div>
-            <div id="autor"> { producto.author }</div>	
-             <div id="precio">{producto.base_price }</div> 
+async function getCartProducts(){
+    let current= cookies.get('cart')
+    let items=[]
+    let a=current.split(',')
+    a.forEach(item =>{
         
-                </ol>
-             </div>
-           
-            )
-}
-}
-export default Cart;
+        let prod= item.split('=')
+        let prodID=prod[0]
+       
+        let cant= prod[1]
+        if (prodID!=0 && cant!="undefined" ){
+        let product = getProductById(prodID)
+        product.quantity = cant;
+        items.push(product)
+      }
+    })
+let productos= items.map((product) =>
+<ol key = { product.id } className="item">
+<div className="title">{product.title}</div>
+<div className="author">{product.author}</div>
+<div className="price">{product.base_price}</div>
+</ol>)
+return (<div>{productos}</div>)
+  }
 
-/*fetch( "http://localhost:8090/product/"+prodID)
-                .then(res => res.json())
-                .then((json) => {
-                    this.setState({
-                        producto: json 
-                      
-                    });
-                })*/
+  function Cart(){
+ 
+getCartProducts()
+  }
+export default Cart;
