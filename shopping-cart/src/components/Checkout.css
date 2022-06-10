@@ -1,0 +1,30 @@
+.checkout-message{
+
+width:300px;
+height: 300px;
+background-color: darkolivegreen;
+color:#fff;
+font-size: 35px;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+border-radius: 25px;
+opacity:0.9;
+padding:15px;
+text-align: center;
+margin-top: 10px;
+display:grid;
+margin-top: 100px;
+margin-left: 670px;
+}
+#head{
+font-size: 30px;
+font-weight: 300;
+}
+#sub{
+font-size: 25px;
+font-weight: 200;
+}
+#msg{
+font-size: 20px;
+font-weight: 200;
+font-style: italic;
+}

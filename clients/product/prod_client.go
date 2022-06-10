@@ -30,5 +30,3 @@ func GetProductsByCategoryId(id int) model.Products {
 
 	return products
 }
-
-//InsertProduct

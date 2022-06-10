@@ -12,8 +12,6 @@ type categoryService struct{}
 type categoryServiceInterface interface {
 	GetCategoryById(id int) (dto.CategoryDto, e.ApiError)
 	GetCategories() (dto.CategoriesDto, e.ApiError)
-	//InsertProduct
-
 }
 
 var (
@@ -32,8 +30,6 @@ func (p *categoryService) GetCategoryById(id int) (dto.CategoryDto, e.ApiError) 
 	categoryDto.Id = category.Id
 	categoryDto.Name = category.Name
 
-	//productDto.UniversalCode = product.UniversalCode
-
 	return categoryDto, nil
 }
 func (p *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
@@ -43,8 +39,6 @@ func (p *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
 		var categoryDto dto.CategoryDto
 		categoryDto.Id = category.Id
 		categoryDto.Name = category.Name
-
-		//	productDto.UniversalCode = product.UniversalCode
 
 		categoriesDto = append(categoriesDto, categoryDto)
 	}

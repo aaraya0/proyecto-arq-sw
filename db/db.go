@@ -33,6 +33,6 @@ func init() {
 	catCliente.Db = db
 }
 func StartDbEngine() {
-	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Cart{}, &model.Category{})
+	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Category{})
 	log.Info("Finishing migration database tables")
 }
