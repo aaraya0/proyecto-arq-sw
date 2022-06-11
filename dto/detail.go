@@ -1,7 +1,7 @@
 package dto
 
 type DetailDto struct {
-	Amount  float32      `json:"amount"`
+	Quantity  int     `json:"quantity"`
 	Product []ProductDto `json:"product"`
 	Price   float32      `json:"price"`
 	Id      int          `json:"id"`
