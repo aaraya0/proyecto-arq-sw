@@ -99,7 +99,7 @@ const producto= items.map((item) => (
 		<div id="titulo">{ item.title}</div>
 		<div id="autor"> { item.author }</div>	
 		<div id="precio">${ item.base_price }</div> 
-
+		<img id="imagen" src="{item.image}"></img>
 		<div><button id={ item.id } class="button-50" role="button" onClick={AddToCart}>Agregar 🛒</button></div>
 	</div>
 
