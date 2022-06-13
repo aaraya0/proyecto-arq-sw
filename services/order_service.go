@@ -1,18 +1,19 @@
 package services
 
-import (
+/*import (
 	//falta client
-	ordCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
-	"github.com/aaraya0/arq-software/Integrador1/dto"
-	"github.com/aaraya0/arq-software/Integrador1/model"
+	//ordCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
+	//userCliente 	"github.com/aaraya0/arq-software/Integrador1/clients/user"
+	//"github.com/aaraya0/arq-software/Integrador1/dto"
+	//"github.com/aaraya0/arq-software/Integrador1/model"
 	e "github.com/aaraya0/arq-software/Integrador1/utils/errors"
 )
 
 type orderService struct{}
 
 type orderServiceInterface interface {
-	GetOrderById(id int) (dto.OrderDto, e.ApiError)
-	GetOrders() (dto.OrdersDto, e.ApiError)
+	GetOrdersByUName(id string) (dto.OrdersDto, e.ApiError)
+	AddOrder (orderDto dto.OrderDto) (dto.OrderDtoResp, e.ApiError)
 	//InsertProduct
 }
 
@@ -23,32 +24,30 @@ var (
 func init() {
 	OrderService = &orderService{}
 }
-func (p *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
+/*func (p *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 	var order model.Order = ordCliente.GetOrderById(id)
+
 	var orderDto dto.OrderDto
+	var userDto  dto.UserDto
 	if order.Id == 0 {
 		return orderDto, e.NewBadRequestApiError("order not found")
 	}
-	
+
 	orderDto.Id = order.Id
-	//orderDto.User = order.User
+
 	orderDto.Total = order.Total
-	//orderDto.OrderDetail = order.OrderDetail	
+	//orderDto.OrderDetail = order.OrderDetail
 	return orderDto, nil
-}
-func (p *orderService) GetOrders() (dto.OrdersDto, e.ApiError) {
-	var orders model.Orders = ordCliente.GetOrders()
-	var ordersDto dto.OrdersDto
-	for _, order := range orders {
-		var orderDto dto.OrderDto
-		orderDto.Id = order.Id
-	    //orderDto.User = order.User
-	    orderDto.Total = order.Total
-	    //orderDto.OrderDetail = order.OrderDetail
-	
-		
-		ordersDto = append(ordersDto, orderDto)
-	}
-	return ordersDto, nil
+}*/
+/*func (s *orderService) AddOrder(orderDto dto.OrderDto) (dto.OrderDtoResp, e.ApiError)  {
+
+	var order model.Order
+	var orderDtoResp dto.OrderDtoResp
+	var total float32
+	total = 0
+	order.User_id= orderDto.User
+
+	....
 
 }
+*/

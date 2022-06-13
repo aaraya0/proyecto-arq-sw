@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import './NavBar.css';
-import image from  "./img/shopping-cart.png"
+import image from  "./shopping-cart.png"
 
 import Cookies from 'universal-cookie';
 

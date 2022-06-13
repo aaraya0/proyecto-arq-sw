@@ -5,6 +5,7 @@ import "./Checkout.css"
  
 const cookies = new Cookies();
 function Checkout(){
+    
 
             return(
             <div className="checkout-message">

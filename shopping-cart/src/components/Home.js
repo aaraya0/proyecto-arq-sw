@@ -4,6 +4,8 @@ import Category from "./categorias"
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
+
+
 const cookiesCartKey= 'cart';
 cookies.set(cookiesCartKey, `0=0`,{ path: '/' } )
 async function AddToCart(e){
@@ -64,6 +66,8 @@ function search(){
 
 }
 
+        
+
 class Home extends React.Component {
 
 
@@ -71,10 +75,11 @@ constructor(props) {
 super(props);
 this.state = {
 items: [],
+/*categories:[],*/
 DataisLoaded: false
+
 };
 }
-
 
 componentDidMount() {
 	fetch(
@@ -84,26 +89,46 @@ componentDidMount() {
 	this.setState({
 	items: json,
 	DataisLoaded: true
-	});
-})}
+	})});
+	/*fetch(
+		"http://localhost:8090/category")
+		.then((res) => res.json())
+		.then((json) => {
+		this.setState({
+		categories: json
+		});
+})*/}
 
 render() {
-const { DataisLoaded, items } = this.state;
+const { DataisLoaded, items/*, categories*/ } = this.state;
 	if (!DataisLoaded) return <div>
 	<h1> Please wait... </h1> </div> ;
 
 
 const producto= items.map((item) => (
 
-	<div key = { item.id } className="item">
+	<div id = { item.id } className="item">
 		<div id="titulo">{ item.title}</div>
 		<div id="autor"> { item.author }</div>	
-		<div id="precio">${ item.base_price }</div> 
-		<img id="imagen" src="{item.image}"></img>
+		<img id="imagen" src={`img/${item.image}`}></img>
+		<div id="precio">${ item.base_price }</div>
+		
+		
 		<div><button id={ item.id } class="button-50" role="button" onClick={AddToCart}>Agregar 🛒</button></div>
 	</div>
 
 ))
+/*const categoria= categories.map((cats)=>(
+
+	<div id="categs" value={cats.id} onClick={showProds}>{cats.name}</div>
+	
+)
+)*/
+
+
+
+
+
 
 
 		return (
@@ -125,3 +150,7 @@ const producto= items.map((item) => (
 			)}
 }
 export default Home;
+
+/*<select name="cats" id="filter" onChange={filterCat}>
+				{categoria}
+			</select>*/

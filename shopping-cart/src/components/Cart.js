@@ -39,13 +39,14 @@ return products.map((product) =>
       <div obj={product} key={product.id} className="product"> </div>
 
       <div className="title">{product.title}</div>
+      <img className="image" src={`img/${product.image}`}></img>
       <div className="price">{ "$" + product.base_price}</div>
       <div className="quantity">
       <div className="amount"> Cantidad: {product.quantity} </div>
 
       </div>
       <div className="subtotal"> Subtotal: ${product.quantity * product.base_price} </div>
-      <button id={product.id} class="Xbutton" role="button" onClick={DeleteCartProduct}>X</button>
+      <button id={product.id} className="Xbutton" role="button" onClick={DeleteCartProduct}>X</button>
       </div>
 
 ) }

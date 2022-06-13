@@ -34,6 +34,7 @@ func (p *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 	productDto.Price = product.Price
 	productDto.Stock = product.Stock
 	productDto.Image = product.Image
+	productDto.Category_id = product.Category_id
 	productDto.Id = product.Id
 	return productDto, nil
 }
@@ -48,6 +49,7 @@ func (p *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 		productDto.Stock = product.Stock
 		productDto.Id = product.Id
 		productDto.Image = product.Image
+		productDto.Category_id = product.Category_id
 		productsDto = append(productsDto, productDto)
 	}
 	return productsDto, nil
@@ -62,7 +64,7 @@ func (s *productService) GetProductsByCategoryId(id int) (dto.ProductsDto, e.Api
 		var productDto dto.ProductDto
 		productDto.Id = product.Id
 		//productDto.Category, _ = CategoryService.GetCategoryById(id)
-		productDto.Category=product.Category
+		productDto.Category_id = product.Category_id
 		productDto.Title = product.Title
 		productDto.Author = product.Author
 		productDto.Price = product.Price
