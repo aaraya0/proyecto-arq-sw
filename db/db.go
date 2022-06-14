@@ -4,6 +4,8 @@ import (
 	//"os"
 
 	catCliente "github.com/aaraya0/arq-software/Integrador1/clients/category"
+	detailCliente "github.com/aaraya0/arq-software/Integrador1/clients/detail"
+	orderCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
 	prodCliente "github.com/aaraya0/arq-software/Integrador1/clients/product"
 	userCliente "github.com/aaraya0/arq-software/Integrador1/clients/user"
 	model "github.com/aaraya0/arq-software/Integrador1/model"
@@ -31,8 +33,10 @@ func init() {
 	prodCliente.Db = db
 	userCliente.Db = db
 	catCliente.Db = db
+	orderCliente.Db = db
+	detailCliente.Db = db
 }
 func StartDbEngine() {
-	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Category{})
+	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Category{}, &model.Order{}, &model.Detail{})
 	log.Info("Finishing migration database tables")
 }

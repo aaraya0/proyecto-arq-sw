@@ -11,9 +11,9 @@ import (
 type detailService struct{}
 
 type detailServiceInterface interface {
-	GetDetailById(id int) (dto.DetailDto, e.ApiError)
-	GetDetails() (dto.DetailsDto, e.ApiError)
-	//InsertProduct
+	AddOrderDetail(OrderDetailIDto dto.OrderDetailIDto, orderId int) (dto.OrderDetailResponseDto, e.ApiError)
+	GetOrderDetailById(id int) (dto.DetailDto, e.ApiError)
+	GetDetailsByOId(id int) (dto.DetailsDto, e.ApiError)
 }
 
 var (
@@ -23,33 +23,51 @@ var (
 func init() {
 	DetailService = &detailService{}
 }
-func (p *detailService) GetDetailById(id int) (dto.DetailDto, e.ApiError) {
+func (s *detailService) GetOrderDetailById(id int) (dto.DetailDto, e.ApiError) {
+
 	var detail model.Detail = detCliente.GetDetailById(id)
 	var detailDto dto.DetailDto
-	if detail.Id == 0 {
-		return detailDto, e.NewBadRequestApiError("detail not found")
-	}
-	
+
 	detailDto.Id = detail.Id
+	detailDto.Product_Id = detail.Product_id
 	detailDto.Quantity = detail.Quantity
-	//detailDto.Product = detail.Product
 	detailDto.Price = detail.Price
-	
+	detailDto.Product_Name = detail.Product_name
+
 	return detailDto, nil
 }
-func (p *detailService) GetDetails() (dto.DetailsDto, e.ApiError) {
-	var details model.Details = detCliente.GetDetails()
-	var detailsDto dto.DetailsDto
-	for _, detail := range details {
-		var detailDto dto.DetailDto
-		detailDto.Id = detail.Id
-	detailDto.Quantity = detail.Quantity
-	//detailDto.Product = detail.Product
-	detailDto.Price = detail.Price
-	
-		
-	detailsDto = append(detailsDto, detailDto)
-	}
-	return detailsDto, nil
 
+func (s *detailService) GetDetailsByOId(id int) (dto.DetailsDto, e.ApiError) {
+	var details model.Details = detCliente.GetDetailsByOId(id)
+	var detailsDto dto.DetailsDto
+
+	for _, orderDetail := range details {
+		var detailDto dto.DetailDto
+		detailDto.Id = orderDetail.Id
+		detailDto.Product_Id = orderDetail.Product_id
+		detailDto.Quantity = orderDetail.Quantity
+		detailDto.Price = orderDetail.Price
+		detailDto.Product_Name = orderDetail.Product_name
+
+		detailsDto = append(detailsDto, detailDto)
+	}
+
+	return detailsDto, nil
+}
+
+func (s *detailService) AddOrderDetail(detailDto dto.OrderDetailIDto, orderId int) (dto.OrderDetailResponseDto, e.ApiError) {
+
+	var detail model.Detail
+	detail.Order_id = orderId
+	detail.Product_id = detailDto.Product_Id
+	detail.Quantity = detailDto.Quantity
+	detail.Product_name = detailDto.Product_Name
+	detail.Price = detailDto.Price
+
+	detail = detCliente.AddOrderDetail(detail)
+
+	var orderDetailResponseDto dto.OrderDetailResponseDto
+	orderDetailResponseDto.Id = detail.Id
+
+	return orderDetailResponseDto, nil
 }

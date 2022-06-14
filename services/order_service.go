@@ -1,20 +1,21 @@
 package services
 
-/*import (
+import (
 	//falta client
-	//ordCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
-	//userCliente 	"github.com/aaraya0/arq-software/Integrador1/clients/user"
-	//"github.com/aaraya0/arq-software/Integrador1/dto"
-	//"github.com/aaraya0/arq-software/Integrador1/model"
+	"time"
+
+	orderCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
+	productCliente "github.com/aaraya0/arq-software/Integrador1/clients/product"
+	"github.com/aaraya0/arq-software/Integrador1/dto"
+	"github.com/aaraya0/arq-software/Integrador1/model"
 	e "github.com/aaraya0/arq-software/Integrador1/utils/errors"
 )
 
 type orderService struct{}
 
 type orderServiceInterface interface {
-	GetOrdersByUName(id string) (dto.OrdersDto, e.ApiError)
-	AddOrder (orderDto dto.OrderDto) (dto.OrderDtoResp, e.ApiError)
-	//InsertProduct
+	AddOrder(orderDto dto.OrderDtoInsert) (dto.OrderDtoResp, e.ApiError)
+	GetOrdersByUId(id int) (dto.OrdersDto, e.ApiError)
 }
 
 var (
@@ -24,30 +25,53 @@ var (
 func init() {
 	OrderService = &orderService{}
 }
-/*func (p *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
-	var order model.Order = ordCliente.GetOrderById(id)
+func (s *orderService) GetOrdersByUId(id int) (dto.OrdersDto, e.ApiError) {
 
-	var orderDto dto.OrderDto
-	var userDto  dto.UserDto
-	if order.Id == 0 {
-		return orderDto, e.NewBadRequestApiError("order not found")
+	var orders model.Orders = orderCliente.GetOrdersByUId(id)
+	var ordersDto dto.OrdersDto
+
+	for _, order := range orders {
+		var orderDto dto.OrderDto
+		orderDto.Id = order.Id
+		orderDto.Date = order.Date
+		orderDto.Total = order.Total
+		orderDto.OrderDetail, _ = DetailService.GetOrderDetailById(order.Id)
+		ordersDto = append(ordersDto, orderDto)
 	}
+	return ordersDto, nil
+}
 
-	orderDto.Id = order.Id
-
-	orderDto.Total = order.Total
-	//orderDto.OrderDetail = order.OrderDetail
-	return orderDto, nil
-}*/
-/*func (s *orderService) AddOrder(orderDto dto.OrderDto) (dto.OrderDtoResp, e.ApiError)  {
+func (s *orderService) AddOrder(orderDtoInsert dto.OrderDtoInsert) (dto.OrderDtoResp, e.ApiError) {
 
 	var order model.Order
-	var orderDtoResp dto.OrderDtoResp
 	var total float32
+	var orderDtoResp dto.OrderDtoResp
 	total = 0
-	order.User_id= orderDto.User
+	order.User_id = orderDtoInsert.User_Id
+	order.Date = time.Now().Format("2022.03.04 17:06:04")
+	for i := 0; i < len(orderDtoInsert.OrderDetails); i++ {
+		var product model.Product
+		detail := orderDtoInsert.OrderDetails[i]
+		product = productCliente.GetProductById(detail.Product_Id)
+		if product.Stock < detail.Quantity {
+			orderDtoResp.Id = 0
+			return orderDtoResp, e.NewConflictApiError("No hay stock de:" + product.Title)
+		}
 
-	....
+		total += (detail.Price * float32(detail.Quantity))
 
+	}
+
+	for i := 0; i < len(orderDtoInsert.OrderDetails); i++ {
+		detail := orderDtoInsert.OrderDetails[i]
+		productCliente.SubsStock(detail.Product_Id, detail.Quantity)
+	}
+
+	order.Total = total
+
+	order = orderCliente.AddOrder(order)
+
+	orderDtoResp.Id = order.Id
+
+	return orderDtoResp, nil
 }
-*/

@@ -2,35 +2,30 @@ package controllers
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/aaraya0/arq-software/Integrador1/dto"
-	service "github.com/aaraya0/arq-software/Integrador1/services"
+
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
 
-func GetDetailrById(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	log.Debug("Detail id to load: " + c.Param("id"))
-	id, _ := strconv.Atoi(c.Param("id"))
-	var detailDto dto.DetailDto
-	detailDto, err := service.DetailService.GetDetailById(id)
-	if err != nil {
-		c.JSON(err.Status(), err)
-		return
-	}
-	c.JSON(http.StatusOK, detailDto)
+func GetDetailById(c *gin.Context) {
+	log.Debug("Detail id: " + c.Param("id"))
+
+	var orderDetailDto dto.DetailDto
+	c.JSON(http.StatusOK, orderDetailDto)
 }
 
-func GetDetails(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	var detailsDto dto.DetailsDto
-	detailsDto, err := service.DetailService.GetDetails()
+func DetailInsert(c *gin.Context) {
+	var detailDto dto.DetailDto
+	err := c.BindJSON(&detailDto)
+
+	log.Debug(detailDto)
+
 	if err != nil {
-		c.JSON(err.Status(), err)
+		log.Error(err.Error())
+		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, detailsDto)
-
+	c.JSON(http.StatusCreated, detailDto)
 }

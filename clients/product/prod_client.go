@@ -30,3 +30,11 @@ func GetProductsByCategoryId(id int) model.Products {
 
 	return products
 }
+
+func SubsStock(id int, amount int) model.Product {
+	var product model.Product
+	Db.Where("id = ?", id).First(&product)
+	Db.Model(&product).Where("id = ?", id).Update("stock", product.Stock)
+	log.Debug("Product: ", product)
+	return product
+}

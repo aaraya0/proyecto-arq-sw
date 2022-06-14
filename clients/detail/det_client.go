@@ -10,17 +10,27 @@ var Db *gorm.DB
 
 func GetDetailById(id int) model.Detail {
 	var detail model.Detail
-	Db.Where("id=?", id).First(&detail)
-
+	Db.Where("id = ?", id).First(&detail)
 	log.Debug("Detail:", detail)
+
 	return detail
 }
 
-func GetDetails() model.Details {
+func GetDetailsByOId(id int) model.Details {
 	var details model.Details
-	Db.Find(&details)
-	log.Debug("Details: ", details)
-	return details
+	Db.Where("order_id = ?", id).Find(&details)
 
+	log.Debug("Details: ", details)
+
+	return details
 }
 
+func AddOrderDetail(orderDetail model.Detail) model.Detail {
+	result := Db.Create(&orderDetail)
+
+	if result.Error != nil {
+		log.Error("")
+	}
+
+	return orderDetail
+}
