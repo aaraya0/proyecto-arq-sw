@@ -28,7 +28,7 @@ func mapUrls() {
 
 	//Order mapping
 	router.POST("/order", orderController.OrderInsert)
-	router.GET("/orderUser/:userId", orderController.GetOrdersByUserId)
+	router.GET("/order/:userId", orderController.GetOrdersByUserId)
 
 	log.Info("Finishing mappings configurations")
 

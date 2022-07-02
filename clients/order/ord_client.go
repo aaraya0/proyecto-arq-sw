@@ -22,7 +22,7 @@ func GetOrdersByUserId(userId int) model.Orders {
 	var orders model.Orders
 
 	log.Debug("userId: ", userId)
-	Db.Where("id_user = ?", userId).Find(&orders)
+	Db.Where("user_id= ?", userId).Find(&orders)
 	log.Debug("Order: ", orders)
 
 	return orders
