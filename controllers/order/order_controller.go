@@ -10,36 +10,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func GetOrderById(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	log.Debug("Order id: " + c.Param("id"))
-
-	var orderDto dto.OrderDto
-
-	c.JSON(http.StatusOK, orderDto)
-}
-
-func GetOrdersByUId(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	log.Debug("Id: " + c.Param("id"))
-
-	var ordersDto dto.OrdersDto
-	id, _ := strconv.Atoi(c.Param("id"))
-	ordersDto, err := service.OrderService.GetOrdersByUId(id)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err.Error())
-		return
-	}
-	c.JSON(http.StatusOK, ordersDto)
-}
-
 func OrderInsert(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	var orderDtoInsert dto.OrderDtoInsert
-	var orderDtoResp dto.OrderDtoResp
-	err := c.BindJSON(&orderDtoInsert)
-
-	log.Debug(orderDtoInsert)
+	var orderDto dto.OrderDto
+	err := c.BindJSON(&orderDto)
 
 	if err != nil {
 		log.Error(err.Error())
@@ -47,20 +20,24 @@ func OrderInsert(c *gin.Context) {
 		return
 	}
 
-	orderDtoResp, er := service.OrderService.AddOrder(orderDtoInsert)
+	orderDto, er := service.OrderService.InsertOrder(orderDto)
 	if er != nil {
-		log.Error(er.Error())
-		c.JSON(er.Status(), er.Error())
+		c.JSON(er.Status(), er)
 		return
 	}
-	for i := 0; i < len(orderDtoInsert.OrderDetails); i++ {
-		_, e := service.DetailService.AddOrderDetail(orderDtoInsert.OrderDetails[i], orderDtoResp.Id)
-		if e != nil {
-			log.Error(err.Error())
-			c.JSON(http.StatusBadRequest, err.Error())
-			return
-		}
-	}
 
-	c.JSON(http.StatusCreated, orderDtoInsert)
+	c.JSON(http.StatusCreated, orderDto)
+}
+
+func GetOrdersByUserId(c *gin.Context) {
+
+	var ordersDto dto.OrdersDto
+	token, _ := strconv.Atoi(c.Param("userId"))
+	ordersDto, err := service.OrderService.GetOrdersByUserId(token)
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+	c.JSON(http.StatusOK, ordersDto)
 }

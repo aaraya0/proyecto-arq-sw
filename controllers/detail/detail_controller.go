@@ -2,30 +2,25 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/aaraya0/arq-software/Integrador1/dto"
-
+	"github.com/aaraya0/arq-software/Integrador1/services"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
 
-func GetDetailById(c *gin.Context) {
-	log.Debug("Detail id: " + c.Param("id"))
+func GetOrderDetailByOrderId(c *gin.Context) {
+	log.Debug("Detail id to load: " + c.Param("orderId"))
 
-	var orderDetailDto dto.DetailDto
-	c.JSON(http.StatusOK, orderDetailDto)
-}
+	orderId, _ := strconv.Atoi(c.Param("orderId"))
+	var orderDetailResDto dto.DetailsDto
 
-func DetailInsert(c *gin.Context) {
-	var detailDto dto.DetailDto
-	err := c.BindJSON(&detailDto)
-
-	log.Debug(detailDto)
+	orderDetailResDto, err := services.OrderDetailService.GetOrderDetailByOrderId(orderId)
 
 	if err != nil {
-		log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(err.Status(), err)
 		return
 	}
-	c.JSON(http.StatusCreated, detailDto)
+	c.JSON(http.StatusOK, orderDetailResDto)
 }

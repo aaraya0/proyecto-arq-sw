@@ -1,15 +1,18 @@
 package dto
 
 type DetailDto struct {
-	Quantity     int     `json:"quantity"`
-	Product_Id   int     `json:"product_id"`
-	Price        float32 `json:"price"`
-	Id           int     `json:"id"`
-	Product_Name string  `json:"product_name"`
+	Id         int     `json:"id"`
+	UnitPrice  float32 `json:"unit_price"`
+	Quantity   float32 `json:"quantity"`
+	Total      float32 `json:"total"`
+	Name       string  `json:"name"`
+	Product_Id int     `json:"product_id"`
+	Order_Id   int     `json:"order_id"`
 }
 
 type DetailsDto []DetailDto
 
+/*
 type OrderDetailIDto struct {
 	Product_Id   int     `json:"product_id"`
 	Quantity     int     `json:"quantity"`
@@ -21,3 +24,4 @@ type OrderDetailsIDto []OrderDetailIDto
 type OrderDetailResponseDto struct {
 	Id int `json:"detail_id"`
 }
+*/

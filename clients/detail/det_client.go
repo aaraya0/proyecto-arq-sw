@@ -8,29 +8,47 @@ import (
 
 var Db *gorm.DB
 
-func GetDetailById(id int) model.Detail {
-	var detail model.Detail
-	Db.Where("id = ?", id).First(&detail)
-	log.Debug("Detail:", detail)
-
-	return detail
-}
-
-func GetDetailsByOId(id int) model.Details {
-	var details model.Details
-	Db.Where("order_id = ?", id).Find(&details)
-
-	log.Debug("Details: ", details)
-
-	return details
-}
-
-func AddOrderDetail(orderDetail model.Detail) model.Detail {
+func InsertOrderDetail(orderDetail model.Detail) model.Detail {
 	result := Db.Create(&orderDetail)
 
 	if result.Error != nil {
 		log.Error("")
 	}
+	log.Debug("Detail Created: ", orderDetail.Id)
+	result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.Product_Id).Update("stock", gorm.Expr("stock - ? ", orderDetail.Quantity))
+
+	if result1.Error != nil {
+		log.Error("Producto no encontrado")
+	}
 
 	return orderDetail
+}
+
+func GetOrderDetailByOrderId(orderId int) model.Details {
+	var orderDetails model.Details
+
+	Db.Where("order_id = ?", orderId).Find(&orderDetails)
+	log.Debug("Detail: ", orderDetails)
+
+	return orderDetails
+}
+
+func InsertOrderDetails(orderDetails model.Details) model.Details {
+
+	for _, orderDetail := range orderDetails {
+
+		result := Db.Create(&orderDetail)
+
+		if result.Error != nil {
+			log.Error("Error al crear")
+		}
+		log.Debug("Detail Created: ", orderDetail.Id)
+		result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.Product_Id).Update("stock", gorm.Expr("stock - ? ", orderDetail.Quantity))
+
+		if result1.Error != nil {
+			log.Error("Producto no encontrado")
+		}
+	}
+
+	return orderDetails
 }

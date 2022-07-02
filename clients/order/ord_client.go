@@ -8,29 +8,31 @@ import (
 
 var Db *gorm.DB
 
-func GetOrderById(id int) model.Order {
-	var order model.Order
-	Db.Where("id = ?", id).First(&order)
-	log.Debug("Order:", order)
-	return order
-}
-
-func GetOrdersByUId(id int) model.Orders {
-	var orders model.Orders
-	Db.Where("user_id = ?", id).Find(&orders)
-	log.Debug("Orders:", orders)
-	return orders
-}
-
-func AddOrder(order model.Order) model.Order {
-
+func InsertOrder(order model.Order) model.Order {
 	result := Db.Create(&order)
 
 	if result.Error != nil {
-
-		order.Id = 0
-		return order
+		log.Error("")
 	}
 	log.Debug("Order Created: ", order.Id)
 	return order
+}
+
+func GetOrdersByUserId(userId int) model.Orders {
+	var orders model.Orders
+
+	log.Debug("userId: ", userId)
+	Db.Where("id_user = ?", userId).Find(&orders)
+	log.Debug("Order: ", orders)
+
+	return orders
+}
+
+func UpdateMontoFinal(monto float32, orderId int) float32 {
+	result := Db.Model(&model.Order{}).Where("id = ?", orderId).Update("total_amount", monto)
+
+	if result.Error != nil {
+		log.Error("Order no encontrada")
+	}
+	return monto
 }

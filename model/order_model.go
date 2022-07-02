@@ -1,10 +1,14 @@
 package model
 
+import (
+	"time"
+)
+
 type Order struct {
-	Id      int     `gorm:"type:int;not null"`
-	User_id int     `gorm:"type:int;not null"`
-	Total   float32 `gorm:"type:float;not null"`
-	Date    string  `gorm:"type:date;not null;"`
+	Id          int       `gorm:"primaryKey"`
+	TotalAmount float32   `gorm:"type:float;not null"`
+	Date        time.Time `gorm:"not null"`
+	User_Id     int       `gorm:"type:int;not null"`
 }
 
 type Orders []Order

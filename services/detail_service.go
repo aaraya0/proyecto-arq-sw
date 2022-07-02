@@ -1,73 +1,44 @@
 package services
 
 import (
-	//falta client
-	detCliente "github.com/aaraya0/arq-software/Integrador1/clients/detail"
+	orderDetailCliente "github.com/aaraya0/arq-software/Integrador1/clients/detail"
 	"github.com/aaraya0/arq-software/Integrador1/dto"
 	"github.com/aaraya0/arq-software/Integrador1/model"
 	e "github.com/aaraya0/arq-software/Integrador1/utils/errors"
 )
 
-type detailService struct{}
+type orderDetailService struct{}
 
-type detailServiceInterface interface {
-	AddOrderDetail(OrderDetailIDto dto.OrderDetailIDto, orderId int) (dto.OrderDetailResponseDto, e.ApiError)
-	GetOrderDetailById(id int) (dto.DetailDto, e.ApiError)
-	GetDetailsByOId(id int) (dto.DetailsDto, e.ApiError)
+type orderDetailServiceInterface interface {
+	GetOrderDetailByOrderId(orderId int) (dto.DetailsDto, e.ApiError)
 }
 
 var (
-	DetailService detailServiceInterface
+	OrderDetailService orderDetailServiceInterface
 )
 
 func init() {
-	DetailService = &detailService{}
-}
-func (s *detailService) GetOrderDetailById(id int) (dto.DetailDto, e.ApiError) {
-
-	var detail model.Detail = detCliente.GetDetailById(id)
-	var detailDto dto.DetailDto
-
-	detailDto.Id = detail.Id
-	detailDto.Product_Id = detail.Product_id
-	detailDto.Quantity = detail.Quantity
-	detailDto.Price = detail.Price
-	detailDto.Product_Name = detail.Product_name
-
-	return detailDto, nil
+	OrderDetailService = &orderDetailService{}
 }
 
-func (s *detailService) GetDetailsByOId(id int) (dto.DetailsDto, e.ApiError) {
-	var details model.Details = detCliente.GetDetailsByOId(id)
-	var detailsDto dto.DetailsDto
+func (s *orderDetailService) GetOrderDetailByOrderId(orderId int) (dto.DetailsDto, e.ApiError) {
 
-	for _, orderDetail := range details {
-		var detailDto dto.DetailDto
-		detailDto.Id = orderDetail.Id
-		detailDto.Product_Id = orderDetail.Product_id
-		detailDto.Quantity = orderDetail.Quantity
-		detailDto.Price = orderDetail.Price
-		detailDto.Product_Name = orderDetail.Product_name
+	var orderDetails model.Details = orderDetailCliente.GetOrderDetailByOrderId(orderId)
+	var orderDetailsResDto dto.DetailsDto
 
-		detailsDto = append(detailsDto, detailDto)
+	if len(orderDetails) == 0 {
+		return orderDetailsResDto, e.NewBadRequestApiError("Detail not found")
 	}
-
-	return detailsDto, nil
-}
-
-func (s *detailService) AddOrderDetail(detailDto dto.OrderDetailIDto, orderId int) (dto.OrderDetailResponseDto, e.ApiError) {
-
-	var detail model.Detail
-	detail.Order_id = orderId
-	detail.Product_id = detailDto.Product_Id
-	detail.Quantity = detailDto.Quantity
-	detail.Product_name = detailDto.Product_Name
-	detail.Price = detailDto.Price
-
-	detail = detCliente.AddOrderDetail(detail)
-
-	var orderDetailResponseDto dto.OrderDetailResponseDto
-	orderDetailResponseDto.Id = detail.Id
-
-	return orderDetailResponseDto, nil
+	for _, orderDetailRes := range orderDetails {
+		var orderDetailResDto dto.DetailDto
+		orderDetailResDto.Id = orderDetailRes.Id
+		orderDetailResDto.Name = orderDetailRes.Name
+		orderDetailResDto.Quantity = orderDetailRes.Quantity
+		orderDetailResDto.UnitPrice = orderDetailRes.UnitPrice
+		orderDetailResDto.Total = orderDetailRes.Total
+		orderDetailResDto.Product_Id = orderDetailRes.Product_Id
+		orderDetailResDto.Order_Id = orderDetailRes.Order_Id
+		orderDetailsResDto = append(orderDetailsResDto, orderDetailResDto)
+	}
+	return orderDetailsResDto, nil
 }
