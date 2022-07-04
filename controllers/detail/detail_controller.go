@@ -11,6 +11,7 @@ import (
 )
 
 func GetOrderDetailByOrderId(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	log.Debug("Detail id to load: " + c.Param("orderId"))
 
 	orderId, _ := strconv.Atoi(c.Param("orderId"))

@@ -11,6 +11,7 @@ import (
 )
 
 func OrderInsert(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var orderDto dto.OrderDto
 	err := c.BindJSON(&orderDto)
 
@@ -30,7 +31,7 @@ func OrderInsert(c *gin.Context) {
 }
 
 func GetOrdersByUserId(c *gin.Context) {
-
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	var ordersDto dto.OrdersDto
 	token, _ := strconv.Atoi(c.Param("userId"))
 	ordersDto, err := service.OrderService.GetOrdersByUserId(token)

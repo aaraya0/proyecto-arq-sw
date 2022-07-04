@@ -42,6 +42,7 @@ const user = await getUserByID(uname.value);
   setIsSubmitted(true);
 
   setCookie("username", user.name)
+  setCookie ("user_id", user.id)
 
 }
 } else {
