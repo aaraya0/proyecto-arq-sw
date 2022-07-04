@@ -34,7 +34,7 @@ return await fetch('http://127.0.0.1:8090/products/' + id).then(response => resp
 }
 async function showCategoryProds(id){
         cookies.set("category", id)
-        
+        gopath("/category")
         let productos= await getProductsByCategoryId(id)
         return productos.map((item)=> (
 

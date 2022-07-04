@@ -1,15 +1,53 @@
-import React from "react";
+
 import './Home.css';
-import Category from "./categorias"
+import React, { useState } from "react";
+
+import "./categorias.css";
+
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
+async function getCategories(){
+	return await fetch('http://127.0.0.1:8090/category').then(response => response.json())
+	}
+	
+	async function getCategoryById(id){
+	return await fetch('http://127.0.0.1:8090/category/' + id).then(response => response.json())
+	}
 
+function showCategories(categories) {
 
+return categories.map((category) => <a onClick={() => 
+showCategoryProds(category.id)} 
+obj={category} key={category.id}>{category.name} </a>)
+}
+
+async function getProductsByCategoryId(id){
+
+return await fetch('http://127.0.0.1:8090/products/' + id).then(response => response.json())
+
+}
+async function showCategoryProds(id){
+	cookies.set("category", id)
+//	window.location.reload(false)
+	let productos= await getProductsByCategoryId(id)
+	return productos.map((item)=> (
+
+	<div key = { item.id } className="item">
+
+	<div id="titulo">{ item.title}</div>
+	<div id="autor"> { item.author }</div>	
+	<div id="precio">${ item.base_price }</div> 
+	</div>
+	))
+}
 const cookiesCartKey= 'cart';
-cookies.set(cookiesCartKey, `0=0`,{ path: '/' } )
-async function AddToCart(e){
 
+
+   
+async function AddToCart(e){
+	if (typeof cookies.get('cart') === 'undefined'){
+		cookies.set(cookiesCartKey, `0=0`,{ path: '/' } )}
 			let itemID = e.target.id
 			let current= cookies.get(cookiesCartKey)
 			let newCart=''
@@ -64,6 +102,21 @@ function search(){
 			}}}
 
 
+}
+function Category() {
+
+	const [categories, setCategories] = useState([])
+	
+	if(categories.length <= 0){
+	getCategories().then(response => setCategories(response))
+	}
+		return (
+		<div>
+		<div id="mySidenav" className="sidenav">
+		{categories.length > 0 ? showCategories(categories) : <a > Volver a cargar </a>}
+		</div>
+		</div>
+		);
 }
 
         

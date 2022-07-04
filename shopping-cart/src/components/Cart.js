@@ -27,7 +27,6 @@ async function getCartProducts(){
 items.push(product)
 }
 }
-
 return items;
 }
 
@@ -83,8 +82,8 @@ async function DeleteCartProduct(e){
       newCart=`${newCart},${compID}=${quantity}`
 })
 
-cookies.set("cart", newCart, { path: '/cart' })
-gopath("/cart")
+cookies.set("cart", newCart, { path: '/' })
+window.location.reload(false)
 }
 
 async function cartCheckout(){
