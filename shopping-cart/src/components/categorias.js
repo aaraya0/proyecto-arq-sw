@@ -19,12 +19,18 @@ return await fetch('http://127.0.0.1:8090/category/' + id).then(response => resp
 function gopath(path){
 window.location = window.location.origin + path
 }
-
+async function handleCat(){
+        cookies.set("category", 0)
+        window.location.reload()
+}
 function showCategories(categories) {
-
-return categories.map((category) => <a onClick={() => 
-showCategoryProds(category.id)} 
-obj={category} key={category.id}>{category.name} </a>)
+const cats=categories.map((category) => <a onClick={() => 
+        showCategoryProds(category.id)} 
+        obj={category} key={category.id}>{category.name} </a>)
+return (<div>
+        <div>{cats}</div>
+        <div><button id="sidenav2"  class="sidenav2" role="button" onClick={handleCat}>Todos los libros</button></div> 
+</div>)
 }
 
 async function getProductsByCategoryId(id){
@@ -34,8 +40,8 @@ return await fetch('http://127.0.0.1:8090/products/' + id).then(response => resp
 }
 async function showCategoryProds(id){
         cookies.set("category", id)
-        gopath("/category")
-        let productos= await getProductsByCategoryId(id)
+        window.location.reload()
+       /* let productos= await getProductsByCategoryId(id)
         return productos.map((item)=> (
 
         <div key = { item.id } className="item">
@@ -44,7 +50,7 @@ async function showCategoryProds(id){
         <div id="autor"> { item.author }</div>	
         <div id="precio">${ item.base_price }</div> 
         </div>
-        ))
+        ))*/
 }
 
 function Category() {

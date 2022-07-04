@@ -27,6 +27,7 @@ async function getCartProducts(){
 items.push(product)
 }
 }
+
 return items;
 }
 

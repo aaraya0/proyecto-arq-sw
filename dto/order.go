@@ -13,13 +13,3 @@ type OrderDto struct {
 }
 
 type OrdersDto []OrderDto
-
-/*type OrderDtoInsert struct {
-	User_Id      int              `json:"user_id"`
-	OrderDetails OrderDetailsIDto `json:"details"`
-}
-
-type OrderDtoResp struct {
-	Id int `json:"order_id"`
-}
-*/

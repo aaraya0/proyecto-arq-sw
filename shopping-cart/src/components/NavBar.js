@@ -26,7 +26,7 @@ var username=  cookies.get("username");
 
         return (
         <>
-        <nav className="NavBar">
+        <nav className="NavBar" >
         <div className="navbar-container">
         <Link to="/home" className="navbar-logo">
         LIBRERIA
