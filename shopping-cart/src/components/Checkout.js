@@ -8,40 +8,40 @@ const cookies = new Cookies();
 async function crearOrden(){
     
     let orderDetails=[]
-    let orderDetail={'product_id':0, 'quantity':0}
-
+    let orderDetail={product_id:0, quantity:0}
     let current= cookies.get('cart')
     let items=[]
     let a=current.split(',')
-    for (let i = 0; i < a.length; i++){
+    for (let i = 1; i < a.length; i++){
     let item = a[i];
     let prod= item.split('=')
-    
     let prodID=prod[0]
     let cant= prod[1]
     if (prodID!=0 && cant!="undefined" && cant>0){
-    orderDetail ={'product_id':prodID,'quantity':cant}
-    orderDetails.push(orderDetail)
-   // let product = await getProductById(prodID)
-    //product.quantity = cant;
-//items.push(product)
+    orderDetail.product_id=parseInt(prodID)
+    alert (orderDetail.product_id)
+    orderDetail.quantity=parseInt(cant)
+    alert(orderDetail.quantity)
+orderDetails.push(orderDetail)
 }
 }
-alert (orderDetails)
+
+
 return orderDetails
 }
 
 async function postOrden (){
-    let user_id = cookies.get("user_id")
-    let orderDetails = crearOrden()
+    let user_Id = parseInt(cookies.get("user_id"))
+   
     var url = 'http://localhost:8090/order';
-var data = {'user_id':user_id, 'orderDetail':orderDetails};
+var data = {"user_id":user_Id, "orderDetail":await(crearOrden())}
 
 fetch(url, {
-  method: 'POST', // or 'PUT'
+  method: 'POST',
+  mode: 'no-cors',
   body: JSON.stringify(data), // data can be `string` or {object}!
   headers:{
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 }).then(res => res.json())
 .catch(error => console.error('Error:', error))

@@ -62,10 +62,8 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 				return orderDto, e.NewConflictApiError("Not enough stock on product: " + product.Title)
 			}
 
-			montofinal += orderDetail.Total
-
 		}
-
+		montofinal += orderDetail.Total
 		orderDetails = append(orderDetails, orderDetail)
 	}
 

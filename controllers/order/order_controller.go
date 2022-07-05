@@ -11,7 +11,7 @@ import (
 )
 
 func OrderInsert(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "POST")
 	var orderDto dto.OrderDto
 	err := c.BindJSON(&orderDto)
 
