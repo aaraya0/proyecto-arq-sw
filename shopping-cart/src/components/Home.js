@@ -7,7 +7,9 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-
+function gopath(path){
+	window.location = window.location.origin + path
+	}
 
 
 
@@ -114,6 +116,10 @@ prodxcat= "product"
 		});
 })*/}
 render() {
+	if(cookies.get("user_id")===undefined){
+		alert("Debe iniciar sesion antes de continuar")
+		gopath("/")
+	}
 const { DataisLoaded, items/*, categories*/ } = this.state;
 	if (!DataisLoaded) return <div>
 	<h1> Please wait... </h1> </div> ;

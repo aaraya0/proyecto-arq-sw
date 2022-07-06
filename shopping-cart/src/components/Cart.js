@@ -13,8 +13,10 @@ window.location = window.location.origin + path
 }
 
 async function getCartProducts(){
+     
       let current= cookies.get('cart')
       let items=[]
+      
       let a=current.split(',')
       for (let i = 0; i < a.length; i++){
       let item = a[i];
@@ -24,7 +26,31 @@ async function getCartProducts(){
       if (prodID!=0 && cant!="undefined" && cant>0){
       let product = await getProductById(prodID)
       product.quantity = cant;
-items.push(product)
+      if(product.quantity>product.stock){
+            alert(`No hay suficiente stock del libro: ${product.title}`)
+            product.quantity=product.stock
+            let current= cookies.get("cart")
+            let newCart=''
+            let items=current.split(',')
+      
+      
+              items.forEach(item =>{
+      
+              let comp= item.split('=')
+              let compID=comp[0]
+              let quantity= comp[1]
+      
+              if (prodID==compID){
+              quantity=product.stock
+      
+              }
+              newCart=`${newCart},${compID}=${quantity}`
+            })
+            
+            cookies.set("cart", newCart, { path: '/' })
+      }
+
+if(product.stock!=0){items.push(product)}
 }
 }
 
@@ -88,7 +114,14 @@ window.location.reload(false)
 }
 
 async function cartCheckout(){
-gopath("/checkout")
+if(cookies.get("total")==0){
+      alert("Su carrito esta vacio")
+}
+ else if (cookies.get("user_id")===undefined){
+		alert("Debe iniciar sesion antes de continuar")
+		gopath("/")
+	}
+else{gopath("/checkout")}
 }
 
 

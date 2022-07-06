@@ -57,7 +57,7 @@ var data = {"user_id":user_Id, "orderDetail": detail}
 fetch(url, {
   method: 'POST',
   mode: 'no-cors',
-  body: JSON.stringify(data), // data can be `string` or {object}!
+  body: JSON.stringify(data), 
   headers:{
     'Content-Type': 'application/json',
   }
@@ -66,6 +66,8 @@ fetch(url, {
 .then(response => console.log('Success:', response));
 }
 
+
+
 function Checkout(){
     
 crearOrden()
@@ -73,11 +75,9 @@ crearOrden()
 
             return(
             <div className="checkout-message">
-
-            <div id="head">¡Felicidades, {cookies.get("username")}!</div>
-            <div id="sub">Tu compra de ${cookies.get("total")} se realizó con éxito</div>
-            <div id="msg">Pronto recibirás tu pedido</div>
-
+            <div id="sub">Estas por realizar una compra de ${cookies.get("total")}</div>
+            <div id="msg">Ingresá tu dirección, pronto recibirás tu pedido.</div>
+            <button>Confirmar</button>
             </div>
 
 
