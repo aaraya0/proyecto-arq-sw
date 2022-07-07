@@ -4,6 +4,9 @@ import Cookies from 'universal-cookie';
 import "./Checkout.css"
  
 const cookies = new Cookies();
+function gopath(path){
+	window.location = window.location.origin + path
+	}
 async function getProductById(id){
   return fetch("http://localhost:8090/product/" + id).then(response => response.json())
   }
@@ -50,6 +53,11 @@ return fetch("http://localhost:8090/order", {
 
 async function shop (){
   crearOrden()
+  cookies.remove("cart")
+  alert(`Felicitaciones, ${cookies.get("username")}! Tu compra fue realizada con éxito.`)
+  cookies.remove("total")
+ 
+  gopath("/home")
 }
 
 
@@ -61,9 +69,38 @@ function Checkout(){
 
             return(
             <div className="checkout-message">
-            <div id="sub">Estas por realizar una compra de ${cookies.get("total")}</div>
-            <div id="msg">Ingresá tu dirección, pronto recibirás tu pedido.</div>
-            <button onClick={shop}>Confirmar</button>
+            <div id="sub">Está por realizar una compra de ${cookies.get("total")}</div>
+            <div id="msg">Ingrese la dirección de envío</div>
+            <div class="form-group">
+  <input type="street" 
+         class="form-control" 
+         id="inputStreet" 
+         placeholder="Calle"/>
+           <input type="zip" 
+         class="form-control" 
+         id="inputNumber" 
+         placeholder="Numeración"/>
+  
+  <input type="city" 
+         class="form-control" 
+         id="inputCity" 
+         placeholder="Ciudad"/>
+  
+
+  
+  <input type="zip" 
+         class="form-control" 
+         id="inputZip" 
+         placeholder="CP"/>
+  
+  
+  <input type="country" 
+         class="form-control" 
+         id="inputCountry" 
+         placeholder="País"/>
+</div>
+
+            <button onClick={shop} id="shopbutton" >Confirmar</button>
             </div>
 
 
