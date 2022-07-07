@@ -7,6 +7,7 @@ type AddressDto struct {
 	Number  int    `json:"number"`
 	Id      int    `json:"id"`
 	CP      int    `json:"cod_postal"`
+	User_Id int    `json:"user_id"`
 }
 
 type AddressesDto []AddressDto

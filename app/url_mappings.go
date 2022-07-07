@@ -1,6 +1,7 @@
 package app
 
 import (
+	addrController "github.com/aaraya0/arq-software/Integrador1/controllers/address"
 	categoryController "github.com/aaraya0/arq-software/Integrador1/controllers/category"
 	detailController "github.com/aaraya0/arq-software/Integrador1/controllers/detail"
 	orderController "github.com/aaraya0/arq-software/Integrador1/controllers/order"
@@ -29,6 +30,10 @@ func mapUrls() {
 	//Order mapping
 	router.POST("/order", orderController.OrderInsert)
 	router.GET("/order/:userId", orderController.GetOrdersByUserId)
+
+	//Address mapping
+	router.POST("/address", addrController.AddressInsert)
+	router.GET("/address/:userId", addrController.GetAddrByUserId)
 
 	log.Info("Finishing mappings configurations")
 

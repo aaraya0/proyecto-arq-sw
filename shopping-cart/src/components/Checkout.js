@@ -47,37 +47,23 @@ return fetch("http://localhost:8090/order", {
 })
 }
 
-async function postOrden (){
-    let user_Id = parseInt(cookies.get("user_id"))
-   
-    var url = 'http://localhost:8090/order'
-    let detail= await(crearOrden())
-var data = {"user_id":user_Id, "orderDetail": detail}
 
-fetch(url, {
-  method: 'POST',
-  mode: 'no-cors',
-  body: JSON.stringify(data), 
-  headers:{
-    'Content-Type': 'application/json',
-  }
-}).then(res => res.json())
-.catch(error => console.error('Error:', error))
-.then(response => console.log('Success:', response));
+async function shop (){
+  crearOrden()
 }
 
 
 
 function Checkout(){
     
-crearOrden()
+
 
 
             return(
             <div className="checkout-message">
             <div id="sub">Estas por realizar una compra de ${cookies.get("total")}</div>
             <div id="msg">Ingresá tu dirección, pronto recibirás tu pedido.</div>
-            <button>Confirmar</button>
+            <button onClick={shop}>Confirmar</button>
             </div>
 
 

@@ -3,6 +3,7 @@ package db
 import (
 	//"os"
 
+	addrCliente "github.com/aaraya0/arq-software/Integrador1/clients/address"
 	catCliente "github.com/aaraya0/arq-software/Integrador1/clients/category"
 	detailCliente "github.com/aaraya0/arq-software/Integrador1/clients/detail"
 	orderCliente "github.com/aaraya0/arq-software/Integrador1/clients/order"
@@ -35,8 +36,9 @@ func init() {
 	catCliente.Db = db
 	orderCliente.Db = db
 	detailCliente.Db = db
+	addrCliente.Db = db
 }
 func StartDbEngine() {
-	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Category{}, &model.Order{}, &model.Detail{})
+	db.AutoMigrate(&model.Product{}, &model.User{}, &model.Category{}, &model.Order{}, &model.Detail{}, &model.Address{})
 	log.Info("Finishing migration database tables")
 }

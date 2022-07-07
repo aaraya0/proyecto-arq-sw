@@ -135,7 +135,7 @@ func (s *orderService) GetOrdersByUserId(token int) (dto.OrdersDto, e.ApiError) 
 		orderDto.Id = order.Id
 		orderDto.Date = order.Date
 		orderDto.TotalAmount = order.TotalAmount
-
+		orderDto.User_Id = order.User_Id
 		var orderDetails model.Details = orderDetailCliente.GetOrderDetailByOrderId(order.Id)
 		for _, orderDetail := range orderDetails {
 			var orderDetailDto dto.DetailDto
