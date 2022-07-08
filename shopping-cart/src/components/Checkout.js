@@ -50,9 +50,27 @@ return fetch("http://localhost:8090/order", {
 })
 }
 
-
+async function postAddress (){
+  
+  return fetch("http://localhost:8090/address", {
+    method:"POST",
+    mode: 'no-cors',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+    country:document.getElementById("inputCountry").value ,
+    city: document.getElementById("inputCity").value,
+    street: document.getElementById("inputStreet").value ,
+    number: Number(document.getElementById("inputNumber").value),
+    cod_postal:Number(document.getElementById("inputZip").value),
+    user_id: Number(cookies.get("user_id"))
+    })
+  })
+}
 async function shop (){
   crearOrden()
+  postAddress()
   cookies.remove("cart")
   alert(`Felicitaciones, ${cookies.get("username")}! Tu compra fue realizada con éxito.`)
   cookies.remove("total")
@@ -72,37 +90,18 @@ function Checkout(){
             <div id="sub">Está por realizar una compra de ${cookies.get("total")}</div>
             <div id="msg">Ingrese la dirección de envío</div>
             <div class="form-group">
-  <input type="street" 
-         class="form-control" 
-         id="inputStreet" 
-         placeholder="Calle"/>
-           <input type="zip" 
-         class="form-control" 
-         id="inputNumber" 
-         placeholder="Numeración"/>
-  
-  <input type="city" 
-         class="form-control" 
-         id="inputCity" 
-         placeholder="Ciudad"/>
-  
-
-  
-  <input type="zip" 
-         class="form-control" 
-         id="inputZip" 
-         placeholder="CP"/>
-  
-  
-  <input type="country" 
-         class="form-control" 
-         id="inputCountry" 
-         placeholder="País"/>
+              <form>
+  <input type="text" class="form-control" id="inputStreet" placeholder="Calle" required/>
+  <input type="number" class="form-control" id="inputNumber" placeholder="Numeración"/>
+  <input type="text" class="form-control" id="inputCity" placeholder="Ciudad" required />
+  <input type="number" class="form-control" id="inputZip" placeholder="CP" required/>
+  <input type="text"  class="form-control"  id="inputCountry"  placeholder="País" required/>
+  </form>
 </div>
-
             <button onClick={shop} id="shopbutton" >Confirmar</button>
+           
             </div>
-
+            
 
 
 )
