@@ -9,6 +9,10 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
+function gopath(path){
+	window.location = window.location.origin + path
+	}
+
 function NavBar() {
 const [click, setClick]=useState(false);
 const [setButton]=useState(true);
@@ -34,14 +38,24 @@ var username=  cookies.get("username");
         <div className='menu-icon' onClick={handleClick}>
         <i className={click ? 'fas fa-times': 'fas fa-bars'}/>
         </div>
-        <ul className={click ? 'nav-menu active' : 'nav-menu'}> 
+        <ul id="lista" className={click ? 'nav-menu active' : 'nav-menu'}> 
 
         <li className='nav-item'>
         <Link to='/cart' className='nav-links' onClick={closeMobileMenu}>
         <img src={image} className="imagen"/>
         </Link>
         </li>
-
+        <li className='nav-item'>
+        <Link to='/account' className='nav-links' onClick={closeMobileMenu}>
+        Mi Cuenta
+        </Link>
+        </li>
+        <li className='nav-item'>
+        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+        Cerrar Sesión
+        </Link>
+        </li>
+       
         </ul>
         <div className="logInfo" >
 
