@@ -72,7 +72,7 @@ async function shop (){
   crearOrden()
   postAddress()
   cookies.remove("cart")
-  alert(`Felicitaciones, ${cookies.get("username")}! Tu compra fue realizada con éxito.`)
+  alert(`Felicitaciones, ${cookies.get("name")}! Tu compra fue realizada con éxito.`)
   cookies.remove("total")
  
   gopath("/home")

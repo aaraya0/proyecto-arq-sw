@@ -53,9 +53,9 @@
     padding:5px ;
 }
 #direcc2{
-    position: fixed;
+    position: sticky;
     margin-top: 230px;
-    margin-left: 100px;
+    margin-left: -330px;
     font-size: 20px;
 }
 
@@ -71,9 +71,9 @@
     padding:5px ;
 }
 #compras2{
-    position: fixed;
+    position: sticky;
     margin-top: 230px;
-    margin-left: 850px;
+    margin-left: 150px;
     font-size: 20px;
     
 }
