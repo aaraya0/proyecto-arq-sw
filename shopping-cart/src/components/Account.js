@@ -37,15 +37,17 @@ const GetOrders=()=>{
         let orders= await getOrdersByUID(cookies.get("user_id"))
     setOrdenes(orders)}
     getOrd();
-
+    
 },[]);
 
 
+
 return (ordenes.map((order)=>
-<div>
-<div>{order.order_id}</div>
-<div>{order.total_amount}</div>
-<div>{order.date}</div>
+<div id="ordenes">
+<div className="or"> ID de la orden: {order.order_id}</div>
+<div className="or"> Total: ${order.total_amount}</div>
+<div className="or"> Fecha: {order.date}</div>
+<details>{order.orderDetail.map((detalle)=> <div><div>Libro: {detalle.name}</div><div>Cantidad: {detalle.quantity}</div></div>)}</details>
 </div>
 )
 )}
@@ -61,11 +63,11 @@ const GetAddresses=()=>{
 
 
 return (address.map((ad)=>
-<div>
-<div>{ad.street}</div>
-<div>{ad.number}</div>
-<div>{ad.city}</div>
-<div>{ad.country}</div>
+<div id="direcciones">
+<div className="direc">{ad.street}</div>
+<div className="direc">{ad.number}, </div>
+<div className="direc">{ad.city}, </div>
+<div className="direc">{ad.country}, </div>
 <div>{ad.cod_postal}</div>
 </div>
 )
@@ -82,14 +84,16 @@ const ShowUser = () => {
         async function fetchData() {
             try {
                 const res = await getUser()
-                setUser(res.name);
+                setUser(res);
             } catch (err) {
                 console.log(err);
             }
         }
         fetchData();
     }, []);
-    return <div>{user}</div>
+    return (<div><div>{user.name}</div>
+    <div id="userName">@{user.user_name}</div></div>
+    )
 }
 
 
@@ -103,12 +107,16 @@ function Account (){
 
  return (
 
-<div>
-<div>Usuario</div>
+<div className="usuario">
 
-<div>{ShowUser()}</div>
-<div>{GetOrders()}</div>
-<div>{GetAddresses()}</div>
+<div id="img"><img src="img/user.png" id="imguser" ></img></div>
+<div id="user">{ShowUser()}</div>
+<div id="direcc">Direcciones de envio registradas</div>
+<div id="direcc2">{GetAddresses()}</div>
+
+<div id="compras">Historial de compras</div>
+
+<div id="compras2">{GetOrders()}</div>
 
 
 </div>

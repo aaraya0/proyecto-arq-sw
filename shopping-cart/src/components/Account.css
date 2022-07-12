@@ -1,4 +1,83 @@
-#prueba{
-    color: greenyellow;
+.usuario{
+    color:#fff;
     z-index: 2;
+    display: flex;
+}
+#user{
+    font-size: 50px;
+    font-weight: 50px;
+    margin-left: 30px;
+   margin-top: 60px;
+   margin-right: 20px;
+}
+
+#imguser{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-left: 100px;
+    margin-top: 50px;
+   
+}
+
+#direcciones{
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #242424;
+    width: 600px;
+}
+#ordenes{
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #242424;
+    width: 700px;
+}
+
+.direc{
+    margin-right: 5px;
+}
+.or{
+    margin-right: 10px;
+}
+#direcc{
+    position: fixed;
+    margin-top: 180px;
+    margin-left: 100px;
+    font-size: 25px;
+    height: 40px;
+    width: 600px;
+    background-color: darkgreen;
+    text-align: center;
+    padding:5px ;
+}
+#direcc2{
+    position: fixed;
+    margin-top: 230px;
+    margin-left: 100px;
+    font-size: 20px;
+}
+
+#compras{
+    position: fixed;
+    margin-top: 180px;
+    margin-left: 850px;
+    font-size: 25px;
+    height: 40px;
+    width: 700px;
+    background-color: darkgreen;
+    text-align: center;
+    padding:5px ;
+}
+#compras2{
+    position: fixed;
+    margin-top: 230px;
+    margin-left: 850px;
+    font-size: 20px;
+    
+}
+#userName{
+    font-size: 25px;
+    font-style: italic;
 }

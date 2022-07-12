@@ -31,8 +31,9 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 	var order model.Order
 
-	order.Date = time.Now()
+	var date = time.Now()
 
+	order.Date = date
 	order.User_Id = orderDto.User_Id
 
 	order = orderCliente.InsertOrder(order)
