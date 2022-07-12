@@ -14,7 +14,7 @@ func InsertAddress(address model.Address) model.Address {
 	if result.Error != nil {
 		log.Error("")
 	}
-	log.Debug("Address submited: ", address.Id, address.CP)
+	log.Debug("Address submited: ", address.Id)
 	return address
 }
 

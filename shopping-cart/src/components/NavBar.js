@@ -9,10 +9,6 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-function gopath(path){
-	window.location = window.location.origin + path
-	}
-
 function NavBar() {
 const [click, setClick]=useState(false);
 const [setButton]=useState(true);
@@ -26,7 +22,10 @@ setButton(true);
 }
 };
 window.addEventListener('resize', showButton);
-var username=  cookies.get("username");
+var username=  cookies.get("name");
+
+window.addEventListener('resize', showButton);
+var username=  cookies.get("name");
 
         return (
         <>
