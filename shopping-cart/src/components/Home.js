@@ -92,8 +92,8 @@ DataisLoaded: false
 
 componentDidMount() {
 	let prodxcat
-	if (cookies.get("category")===undefined || cookies.get("category")==0){
-prodxcat= "product"
+	if (cookies.get("category")==undefined || cookies.get("category")==0){
+    prodxcat= "product"
 	}
 	else {
 	prodxcat= `products/${cookies.get("category")}`
