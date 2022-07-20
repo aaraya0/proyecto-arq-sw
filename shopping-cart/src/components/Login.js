@@ -65,17 +65,17 @@ const renderForm = (
     <div className="form2">
     <form onSubmit={handleSubmit}>
     <div className="input-container">
-    <label>Username </label>
+    <label>Usuario </label>
     <input type="text" name="uname" required />
     {renderErrorMessage("uname")}
     </div>
     <div className="input-container">
-    <label>Password </label>
+    <label>Contraseña </label>
     <input type="password" name="pass" required />
     {renderErrorMessage("pass")}
     </div>
     <div className="button-container">
-    <input type="submit" />
+    <input type="submit" value="Iniciar Sesión"/>
     </div>
     </form>
     </div>

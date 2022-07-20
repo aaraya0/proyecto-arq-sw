@@ -9,14 +9,13 @@ import (
 	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
 	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
 	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
-	//"github.com/dgrijalva/jwt-go"
 )
 
 type orderService struct{}
 
 type orderServiceInterface interface {
 	InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiError)
-	GetOrdersByUserId(token int) (dto.OrdersDto, e.ApiError) //token cambiado de string a int temporalmente. revisar
+	GetOrdersByUserId(token int) (dto.OrdersDto, e.ApiError)
 }
 
 var (
@@ -98,30 +97,8 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 
 //Buscar orden por IDuser
 
-func (s *orderService) GetOrdersByUserId(token int) (dto.OrdersDto, e.ApiError) { //token cambiado de string a int temporalmente (login sin token)
-	//var userId float64
-	/*tkn, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
+func (s *orderService) GetOrdersByUserId(token int) (dto.OrdersDto, e.ApiError) {
 
-	if err != nil {
-		if err == jwt.ErrSignatureInvalid {
-			return nil, e.NewUnauthorizedApiError("Unauthorized")
-		}
-		return nil, e.NewUnauthorizedApiError("Unauthorized")
-	}
-
-	if !tkn.Valid {
-		return nil, e.NewUnauthorizedApiError("Unauthorized")
-
-	}
-	if claims, ok := tkn.Claims.(jwt.MapClaims); ok && tkn.Valid {
-
-		userId = (claims["user_id"].(float64))
-
-	} else {
-		return nil, e.NewUnauthorizedApiError("Unauthorized")
-	}
-	*/
-	//var IdUserX int = int(userId)   //temporalmente comentado porq el login es sin token. revisar
 	var IdUserX int = token
 	var orders model.Orders = orderCliente.GetOrdersByUserId(IdUserX)
 	var ordersDto dto.OrdersDto
