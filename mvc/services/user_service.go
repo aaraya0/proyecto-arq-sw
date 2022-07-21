@@ -1,10 +1,10 @@
 package services
 
 import (
-	userCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/user"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
-	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
+	userCliente "mvc/clients/user"
+	"mvc/dto"
+	"mvc/model"
+	e "mvc/utils/errors"
 )
 
 type userService struct{}

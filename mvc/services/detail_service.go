@@ -1,10 +1,10 @@
 package services
 
 import (
-	orderDetailCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/detail"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
-	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
+	orderDetailCliente "mvc/clients/detail"
+	"mvc/dto"
+	"mvc/model"
+	e "mvc/utils/errors"
 )
 
 type orderDetailService struct{}

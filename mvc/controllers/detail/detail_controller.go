@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/services"
+	"mvc/dto"
+	"mvc/services"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )

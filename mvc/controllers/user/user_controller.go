@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	service "github.com/aaraya0/arq-software/Integrador1/mvc/services"
+	"mvc/dto"
+	service "mvc/services"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )

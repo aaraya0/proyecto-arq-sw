@@ -1,10 +1,10 @@
 package services
 
 import (
-	categCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/category"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
-	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
+	categCliente "mvc/clients/category"
+	"mvc/dto"
+	"mvc/model"
+	e "mvc/utils/errors"
 )
 
 type categoryService struct{}

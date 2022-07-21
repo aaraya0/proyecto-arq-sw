@@ -1,11 +1,11 @@
 package services
 
 import (
-	addrCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/address"
+	addrCliente "mvc/clients/address"
 
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
-	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
+	"mvc/dto"
+	"mvc/model"
+	e "mvc/utils/errors"
 	//"github.com/dgrijalva/jwt-go"
 )
 

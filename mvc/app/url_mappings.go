@@ -1,12 +1,12 @@
 package app
 
 import (
-	addrController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/address"
-	categoryController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/category"
-	detailController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/detail"
-	orderController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/order"
-	productController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/product"
-	userController "github.com/aaraya0/arq-software/Integrador1/mvc/controllers/user"
+	addrController "mvc/controllers/address"
+	categoryController "mvc/controllers/category"
+	detailController "mvc/controllers/detail"
+	orderController "mvc/controllers/order"
+	productController "mvc/controllers/product"
+	userController "mvc/controllers/user"
 	log "github.com/sirupsen/logrus"
 )
 

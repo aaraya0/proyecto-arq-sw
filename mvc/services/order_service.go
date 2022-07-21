@@ -3,12 +3,12 @@ package services
 import (
 	"time"
 
-	orderDetailCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/detail"
-	orderCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/order"
-	productCliente "github.com/aaraya0/arq-software/Integrador1/mvc/clients/product"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/dto"
-	"github.com/aaraya0/arq-software/Integrador1/mvc/model"
-	e "github.com/aaraya0/arq-software/Integrador1/mvc/utils/errors"
+	orderDetailCliente "mvc/clients/detail"
+	orderCliente "mvc/clients/order"
+	productCliente "mvc/clients/product"
+	"mvc/dto"
+	"mvc/model"
+	e "mvc/utils/errors"
 )
 
 type orderService struct{}

@@ -1,7 +1,7 @@
 package detail
 
 import (
-	model "github.com/aaraya0/arq-software/Integrador1/mvc/model"
+	model "mvc/model"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
