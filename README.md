@@ -1,7 +1,1 @@
--shopping-cart es la carpeta del front 
--el carrito debe ser una clase mas?
--cuantos dtos hay que hacer?
--Corregir/ agregar ROUTE en app.js (ver por que cuando esta Route no aparece nada en el localhost)
--Para correr el react hay que estar dentro de la carpeta shopping-cart y el comando es npm run start
--en category service lo ideal seria GetCategoryByName en vez de ById? Como se hace?
--idem para product
+
